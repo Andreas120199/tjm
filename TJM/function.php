@@ -29,6 +29,73 @@ if(isset($_POST['addnewcar'])){
     }
 }
 
+//menambah foto
+if(isset($_POST['addpicture'])){
+    $no_polisi = $_POST['no_polisi'];
+    $foto_mobil = $_POST['foto_mobil'];
+    $foto_norangka = $_POST['foto_norangka'];
+    $foto_nomesin = $_POST['foto_nomesin'];
+    $foto_stnk = $_POST['foto_stnk'];
+    $foto_bpkb = $_POST['foto_bpkb'];
+
+    //Buat Gambar
+    $allowed_extention = array('png', 'jpg');
+    $nama = $_FILES['files']['name']; //ambil nama gambar
+    $dot = explode('.',$nama);
+    $ekstensi = strtolower(end($dot)); //ambil ekstensi
+    $ukuran = $_FILES['files']['size']; //ambil size file
+    $file_temp = $_FILES['files']['temp_name']; //ambil lokasi filenya
+
+    //penamaan file -> enkripsi
+    $image = md5(uniqid($nama,true) . time()).'.'.$ekstensi;//gabung nama enkripsi dengan ekstensinya
+
+    $cekdata = mysqli_query($conn,"select * from detail where no_polisi = '$no_polisi'");
+    $hitungdata = mysqli_num_rows($cekdata);
+
+    if($hitungdata < 1){
+
+        if(in_array($ekstensi, $allowed_extention) === true){
+            if($ukuran < 15000000){
+                move_uploaded_file($file_temp, 'image/'.$foto_mobil, 'image/'.$foto_norangka, 'image/'.$foto_nomesin, 'image/'.$foto_bpkb);
+                $addtotable = mysqli_query($conn, "insert into detail (no_polisi, foto_mobil, foto_norangka, foto_nomesin, foto_stnk, foto_bpkb)
+                values ('$no_polisi', '$foto_mobil', '$foto_norangka', '$foto_nomesin', '$foto_stnk', '$foto_bpkb')");
+                if($addtotable){
+                    header('location:detail.php');
+                }else{
+                    echo'gagal';
+                    header('location:detail.php');
+                }
+            }else{
+                //Kalau Filenya lebih dari 15mb
+                echo '
+                <script>
+                    alert("Ukuran terlalu besar, harus di bawah 15 mb);
+                    window.location.href="detail.php";
+                </script>
+                ';
+            }
+        }else{
+            //Kalau filenya bukan png atau jpg
+            echo '
+                <script>
+                    alert("File bukan PNG/JPG ");
+                    window.location.href="detail.php";
+                </script>
+            ';
+        }
+}else {
+    //jika udh ada
+    echo '
+    <script>
+        alert("No Polisi Sudah tersedia");
+        window.location.href="detail.php";
+    </script>
+    ';
+    }
+    }
+
+
+
 //menambah data customer
 if(isset($_POST['addnewcustomer'])){
     $nama = $_POST['nama'];

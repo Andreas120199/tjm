@@ -78,7 +78,7 @@ $imgUrl = "logo_tjm.PNG";
                                 <i class="fas fa-table me-1"></i>
                                 <!-- Button to Open the Modal -->
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-                                        Tambah Mobil
+                                        Tambah Data
                                     </button>
                             </div>
                             <div class="card-body">
@@ -88,64 +88,62 @@ $imgUrl = "logo_tjm.PNG";
                                             <th>No Polisi</th>
                                             <th>Merk</th>
                                             <th>Tahun</th>
-                                            <th>Type</th>
-                                            <th>No Rangka</th>
-                                            <th>No Mesin</th>
-                                            <th>No Faktur</th>
                                             <th>STNK Atas Nama</th>
-                                            <th>Status Unit</th>
-                                            <th>Unit In</th>
                                             <th>Seller</th>
-                                            <th>Unit Out</th>
+                                            <th>Harga Beli</th>
+                                            <th>Harga Awal</th>
                                             <th>Buyer</th>
+                                            <th>Cara Pembayaran</th>
+                                            <th>Tanggal Bayar</th>
+                                            <th>Nominal Transfer</th>
                                             <th>Edit</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     <?php
-                                    // buat tampilin data ke tabel //
-                                        $ambilsemuadata = mysqli_query($conn,"select * from info");
-                                        while($data=mysqli_fetch_array($ambilsemuadata)){
+                                     // buat tampilin data ke tabel //
+                                        $sql = "SELECT * FROM info, managemet, customer
+                                        where info.no_polisi = managemet.no_polisi, managemet.buyer = info.buyer, 
+                                        managemet.seller = info.seller, customer.nama = managemet.buyer";
+
+                                        $ambildata = mysqli_query($conn,$sql);
+                                        while($data=mysqli_fetch_array($ambildata)){
                                             $nopolisi = $data['no_polisi'];
                                             $merk = $data['merk'];
-                                            $type = $data['type'];
                                             $tahun = $data['tahun'];
-                                            $norangka = $data['no_rangka'];
-                                            $nomesin = $data['no_mesin'];
-                                            $nofaktur = $data['no_faktur'];
                                             $stnk = $data['stnk_atasnama'];
-                                            $status = $data['status_unit'];
-                                            $unitin = $data['unitin'];
                                             $seller = $data['seller'];
-                                            $unitout = $data['unitout'];
+                                            $hargabeli = $data['hargabeli'];
+                                            $hargaawal = $data['hargaawal'];
                                             $buyer = $data['buyer'];
-                                            $idm = $data['idmobil'];
+                                            $cara_bayar = $data['cara_bayar'];
+                                            $tgl_bayar = $data['tgl_bayar'];
+                                            $nominal = $data['nominal'];
+                                            $idmng = $data['idmanage'];
                                         
                                     ?>
                                         <tr>
                                             <td><?=$nopolisi;?></td>
                                             <td><?=$merk;?></td>
                                             <td><?=$tahun;?></td>
-                                            <td><?=$type;?></td>
-                                            <td><?=$norangka;?></td>
-                                            <td><?=$nomesin;?></td>
-                                            <td><?=$nofaktur;?></td>
                                             <td><?=$stnk;?></td>
-                                            <td><?=$status;?></td>
-                                            <td><?=$unitin;?></td>
                                             <td><?=$seller;?></td>
-                                            <td><?=$unitout;?></td>
+                                            <td><?=$hargabeli;?></td>
+                                            <td><?=$hargaawal;?></td>
                                             <td><?=$buyer;?></td>
+                                            <td><?=$cara_bayar;?></td>
+                                            <td><?=$tgl_bayar;?></td>
+                                            <td><?=$nominal;?></td>
                                             <td>
-                                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#edit<?=$idm;?>">
+                                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#edit<?=$idmng;?>">
                                                     Edit
                                                 </button>
-                                                <input type="hidden" name = "idmobilhapus" value="<?=$idm;?>">
+                                                <input type="hidden" name = "idmobilhapus" value="<?=$idmng;?>">
                                             </td>
                                         </tr>
                                                                                             
                                                 <!-- The Modal Edit -->
-                                                <div class="modal fade" id="edit<?=$idm;?>">
+                                                <div class="modal fade" id="edit<?=$idmng;?>">
                                                     <div class="modal-dialog">
                                                     <div class="modal-content">
                                                 
@@ -197,37 +195,6 @@ $imgUrl = "logo_tjm.PNG";
                                                 </div>
                                                 </div>
                                             </div>
-                                                <!-- The Modal Delete -->
-                                                <div class="modal fade" id="delete<?=$idm;?>">
-                                                    <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                
-                                                    <!-- Modal Header -->
-                                                    <div class="modal-header">
-                                                    <h4 class="modal-title">Hapus?</h4>
-                                                    <button type="button" class="btn-close" aria-label="Close" data-dismiss="modal">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                    </div>
-                                                    
-                                                    <!-- Modal body -->
-                                                    <form method = "post">
-                                                    <div class="modal-body">
-                                                    Apakah anda yakin untuk menghapus data ini?
-                                                    <br>
-                                                    </div>
-                                                    
-                                                    <!-- Modal footer -->
-                                                    <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <input type="hidden" name = "idm" value="<?=$idm;?>">      
-                                                    <button type="submit" class="btn btn-Danger" name = "delete">Hapus</button>
-                                                </div>
-                                                    </form>
-                                                    
-                                                </div>
-                                                </div>
-                                                </div>
                                         <?php
                                         };
                                     ?>
@@ -262,7 +229,7 @@ $imgUrl = "logo_tjm.PNG";
       
         <!-- Modal Header -->
         <div class="modal-header">
-          <h4 class="modal-title">Tambah Mobil</h4>
+          <h4 class="modal-title">Tambah Data</h4>
           <button type="button" class="btn-close" aria-label="Close" data-dismiss="modal">
             <span aria-hidden="true">&times;</span>
           </button>

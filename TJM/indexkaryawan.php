@@ -58,6 +58,10 @@ $imgUrl = "logo_tjm.PNG";
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Detail
                             </a>
+                            <a class="nav-link" href="customerkaryawan.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                Customer
+                            </a>
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">

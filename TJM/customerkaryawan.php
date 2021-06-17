@@ -13,7 +13,7 @@ $imgUrl = "logo_tjm.PNG";
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Dashboard - Admin</title>
+        <title>Dashboard - Karyawan</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
@@ -81,10 +81,6 @@ $imgUrl = "logo_tjm.PNG";
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-                                <!-- Button to Open the Modal -->
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-                                        Tambah Data
-                                    </button>
                             </div>
                             <div class="card-body">
                                 <table id="datatablesSimple">
@@ -96,7 +92,6 @@ $imgUrl = "logo_tjm.PNG";
                                             <th>No Telepon 3 +62</th>
                                             <th>Alamat</th>
                                             <th>Keterangan</th>
-                                            <th>Edit</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -120,12 +115,6 @@ $imgUrl = "logo_tjm.PNG";
                                             <td><?=$notlp3;?></td>
                                             <td><?=$alamat;?></td>
                                             <td><?=$deskripsi;?></td>
-                                            <td>
-                                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#edit<?=$idc;?>">
-                                                    Edit
-                                                </button>
-                                                <input type="hidden" name = "idmobilhapus" value="<?=$idc;?>">
-                                            </td>
                                         </tr>
                                                                                             
                                                 <!-- The Modal Edit -->
