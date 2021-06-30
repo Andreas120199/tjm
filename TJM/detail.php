@@ -1,7 +1,7 @@
 <?php
 require 'function.php';
 require 'cek.php';
-$imgUrl = "logo_tjm.PNG"; 
+$imgUrl = "logo_tjm.png"; 
 ?> 
 ?>
 
@@ -20,6 +20,16 @@ $imgUrl = "logo_tjm.PNG";
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <!-- buat kasih batasan gambar -->
+        <style>
+            .zoomable{
+                width: 250px;
+            }
+            .zoomable:hover{
+                transform: scale(2.5);
+                transition: 0.5s ease;
+            }
+        </style>
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -29,10 +39,6 @@ $imgUrl = "logo_tjm.PNG";
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-                <div class="input-group">
-                    <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
-                </div>
             </form>
             <!-- Navbar-->
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
@@ -75,7 +81,8 @@ $imgUrl = "logo_tjm.PNG";
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">PT. Taruna Jaya Motor</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">Dashboard</li>
+                            <li class="breadcrumb-item"><a href="index.php">Main Page</a></li>
+                            <li class="breadcrumb-item active">Customer</li>
                         </ol>
                         <div class="card mb-4">
                             <div class="card-header">
@@ -101,34 +108,74 @@ $imgUrl = "logo_tjm.PNG";
                                     <tbody>
                                     <?php
                                     // buat tampilin data ke tabel //
-                                        $ambilsemuadata = mysqli_query($conn,"select * from detail, info where info.no_polisi = detail.no_polisi");
-                                        while($data=mysqli_fetch_array($ambilsemuadata)){
+                                    //, info where info.no_polisi = detail.no_polisi
+                                        $detail_data = mysqli_query($conn,"select * from detail");
+                                        // $detail_data_fetch =mysqli_fetch_array($detail_data);
+                                        while($data=mysqli_fetch_array($detail_data)){
                                             $nopolisi = $data['no_polisi'];
                                             $foto_mobil = $data['foto_mobil'];
                                             $foto_norangka = $data['foto_norangka'];
                                             $foto_nomesin = $data['foto_nomesin'];
                                             $foto_stnk = $data['foto_stnk'];
                                             $foto_bpkb = $data['foto_bpkb'];
-                                            $idp = $data['idpicture'];
+                                            $idp = $data['iddetail'];
+
+                                            //cek foto mobil
+                                            if($foto_mobil==null){
+                                                $img = "No Photo";
+                                            }else{
+                                                $img = '<img src="images/'.$foto_mobil.'" class="zoomable">';
+                                            }
+                                        
+                                            //cek foto no rangka
+                                            if($foto_norangka==null){
+                                                $img = "No Photo";
+                                            }else{
+                                                $img = '<img src="images/'.$foto_norangka.'" class="zoomable">';
+                                            }
+                                        
+                                            //cek foto no mesin
+                                            if($foto_nomesin==null){
+                                                $img = "No Photo";
+                                            }else{
+                                                $img = '<img src="images/'.$foto_nomesin.'" class="zoomable">';
+                                            }
+                                        
+                                            //cek foto stnk
+                                            if($foto_stnk==null){
+                                                $img = "No Photo";
+                                            }else{
+                                                $img = '<img src="images/'.$foto_stnk.'" class="zoomable">';
+                                            }
+                                        
+                                            //cek foto bpkb
+                                            if($foto_bpkb==null){
+                                                $img = "No Photo";
+                                            }else{
+                                                $img = '<img src="images/'.$foto_bpkb.'" class="zoomable">';
+                                            }
                                         
                                     ?>
                                         <tr>
                                             <td><?=$nopolisi;?></td>
-                                            <td><?=$foto_mobil;?></td>
-                                            <td><?=$foto_norangka;?></td>
-                                            <td><?=$foto_nomesin;?></td>
-                                            <td><?=$foto_stnk;?></td>
-                                            <td><?=$foto_bpkb;?></td>
+                                            <td><img src="<?php echo $foto_mobil;?>" alt="HTML tutorial" style="width:42px;height:42px;"></td>
+                                            <td><img src="<?php echo $foto_norangka;?>" alt="HTML tutorial" style="width:42px;height:42px;"></td>
+                                            <td><img src="<?php echo $foto_nomesin;?>" alt="HTML tutorial" style="width:42px;height:42px;"></td>
+                                            <td><img src="<?php echo $foto_stnk;?>" alt="HTML tutorial" style="width:42px;height:42px;"></td>
+                                            <td><img src="<?php echo $foto_bpkb;?>" alt="HTML tutorial" style="width:42px;height:42px;"></td>
                                             <td>
                                                 <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#edit<?=$idp;?>">
                                                     Edit
                                                 </button>
-                                                <input type="hidden" name = "idmobilhapus" value="<?=$idm;?>">
+                                                <input type="hidden" name = "iddetailhapus" value="<?=$idp;?>">
+                                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete<?=$idp;?>">
+                                                    Delete 
+                                                </button>
                                             </td>
                                         </tr>
                                                                                             
                                                 <!-- The Modal Edit -->
-                                                <div class="modal fade" id="edit<?=$idm;?>">
+                                                <div class="modal fade" id="edit<?=$idp;?>">
                                                     <div class="modal-dialog">
                                                     <div class="modal-content">
                                                 
@@ -143,43 +190,62 @@ $imgUrl = "logo_tjm.PNG";
                                                     <!-- Modal body -->
                                                     <form method = "post"  enctype="multipart/form-data" >
                                                     <div class="modal-body">
+                                                    No Polisi: 
                                                     <input type = "text" name = "no_polisi" value="<?=$nopolisi;?>" placeholder = "No Polisi" class = "form-control" required>
-                                                    <br>
-                                                    <input type = "text" name = "merk" value="<?=$merk;?>" placeholder = "Merk" class = "form-control" required>
-                                                    <br>
-                                                    <input type = "text" name = "tahun" value="<?=$tahun;?>" placeholder = "Tahun" class = "form-control" required>
-                                                    <br>
-                                                    <input type = "text" name = "type" value="<?=$type;?>" placeholder = "Type" class = "form-control" required>
-                                                    <br>
-                                                    <input type = "text" name = "no_rangka" value="<?=$norangka;?>" placeholder = "No Rangka" class = "form-control" required>
-                                                    <br>
-                                                    <input type = "text" name = "no_mesin" value="<?=$nomesin;?>" placeholder = "No Mesin" class = "form-control" required>
-                                                    <br>
-                                                    <input type = "text" name = "no_faktur" value="<?=$nofaktur;?>" placeholder = "No Faktur" class = "form-control" required>
-                                                    <br>
-                                                    <input type = "text" name = "stnk_atasnama" value="<?=$stnk;?>" placeholder = "STNK Atas Nama" class = "form-control" required>
-                                                    <br>
-                                                    <input type = "text" name = "status_unit" value="<?=$status;?>" placeholder = "Status Unit" class = "form-control" required>
-                                                    <br>
-                                                    <input type = "text" name = "seller" value="<?=$seller;?>" placeholder = "Seller" class = "form-control" required>
-                                                    <br>
-                                                    <input type = "text" name = "unitout" value="<?=$unitout;?>" placeholder = "Unit Out" class = "form-control" required>
-                                                    <br>
-                                                    <input type = "text" name = "buyer" value="<?=$buyer;?>" placeholder = "Buyer" class = "form-control" required>
-                                                    <br>
+                                                    Foto Mobil : 
+                                                    <input type = "file" name = "foto_mobil" value="<?=$foto_mobil;?>" placeholder = "Foto Mobil" class = "form-control" required>
+                                                    Foto Nomor Rangka : 
+                                                    <input type = "file" name = "foto_norangka" value="<?=$foto_norangka;?>" placeholder = "Foto Nomor Rangka" class = "form-control" required>
+                                                    Foto Nomor Mesin :
+                                                    <input type = "file" name = "foto_nomesin" value="<?=$foto_nomesin;?>" placeholder = "Foto Nomor Mesin" class = "form-control" required>
+                                                    Scan STNK :
+                                                    <input type = "file" name = "foto_stnk" value="<?=$foto_stnk;?>" placeholder = "Scan STNK" class = "form-control" required>
+                                                    Scan BPKB :
+                                                    <input type = "file" name = "foto_bpkb" value="<?=$foto_bpkb;?>" placeholder = "Scan BPKB" class = "form-control" required>
                                                     </div>
                                                     
                                                     <!-- Modal footer -->
                                                     <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <input type="hidden" name = "idm" value="<?=$idm;?>">      
-                                                    <button type="submit" class="btn btn-primary" name = "update">Save changes</button>
+                                                    <input type="hidden" name = "idp" value="<?=$idp;?>">      
+                                                    <button type="submit" class="btn btn-primary" name = "updatedetail">Save changes</button>
                                                 </div>
                                                     </form>
                                                     
                                                 </div>
                                                 </div>
                                             </div>  
+                                                <!-- The Modal Delete -->
+                                                <div class="modal fade" id="delete<?=$idp;?>">
+                                                    <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                
+                                                    <!-- Modal Header -->
+                                                    <div class="modal-header">
+                                                    <h4 class="modal-title">Hapus?</h4>
+                                                    <button type="button" class="btn-close" aria-label="Close" data-dismiss="modal">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                    </div>
+                                                    
+                                                    <!-- Modal body -->
+                                                    <form method = "post">
+                                                    <div class="modal-body">
+                                                    Apakah anda yakin untuk menghapus data ini?
+                                                    <br>
+                                                    </div>
+                                                    
+                                                    <!-- Modal footer -->
+                                                    <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <input type="hidden" name = "idp" value="<?=$idp;?>">      
+                                                    <button type="submit" class="btn btn-Danger" name = "deletephoto">Hapus</button>
+                                                </div>
+                                                    </form>
+                                                    
+                                                </div>
+                                                </div>
+                                                </div>
                                         <?php
                                         };
                                     ?>
@@ -223,18 +289,24 @@ $imgUrl = "logo_tjm.PNG";
         <!-- Modal body -->
         <form method = "post" enctype="multipart/form-data">
         <div class="modal-body">
+            No Polisi: 
           <input type = "text" name = "no_polisi" placeholder = "No Polisi" class = "form-control" required>
+          Foto Mobil : 
           <input type = "file" name = "foto_mobil" placeholder = "Foto Mobil" class = "form-control" required>
+          Foto Nomor Rangka : 
           <input type = "file" name = "foto_norangka" placeholder = "Foto Nomor Rangka" class = "form-control" required>
+          Foto Nomor Mesin :
           <input type = "file" name = "foto_nomesin" placeholder = "Foto Nomor Mesin" class = "form-control" required>
+          Scan STNK :
           <input type = "file" name = "foto_stnk" placeholder = "Scan STNK" class = "form-control" required>
+          Scan BPKB :
           <input type = "file" name = "foto_bpkb" placeholder = "Scan BPKB" class = "form-control" required>
         </div>
         
         <!-- Modal footer -->
         <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" name = "addnewpicture">Save changes</button>
+        <button type="submit" class="btn btn-primary" name = "addpicture">Save changes</button>
       </div>
         </form>
         

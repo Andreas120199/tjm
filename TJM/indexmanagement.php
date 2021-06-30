@@ -29,10 +29,6 @@ $imgUrl = "logo_tjm.PNG";
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-                <div class="input-group">
-                    <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
-                </div>
             </form>
             <!-- Navbar-->
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
@@ -138,7 +134,10 @@ $imgUrl = "logo_tjm.PNG";
                                                 <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#edit<?=$idmng;?>">
                                                     Edit
                                                 </button>
-                                                <input type="hidden" name = "idmobilhapus" value="<?=$idmng;?>">
+                                                <input type="hidden" name = "idmanagehapus" value="<?=$idmng;?>">
+                                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete<?=$idmng;?>">
+                                                    Delete 
+                                                </button>
                                             </td>
                                         </tr>
                                                                                             
@@ -158,43 +157,73 @@ $imgUrl = "logo_tjm.PNG";
                                                     <!-- Modal body -->
                                                     <form method = "post">
                                                     <div class="modal-body">
+                                                    No Polisi : 
                                                     <input type = "text" name = "no_polisi" value="<?=$nopolisi;?>" placeholder = "No Polisi" class = "form-control" required>
-                                                    <br>
+                                                    Merk : 
                                                     <input type = "text" name = "merk" value="<?=$merk;?>" placeholder = "Merk" class = "form-control" required>
-                                                    <br>
+                                                    Tahun : 
                                                     <input type = "text" name = "tahun" value="<?=$tahun;?>" placeholder = "Tahun" class = "form-control" required>
-                                                    <br>
-                                                    <input type = "text" name = "type" value="<?=$type;?>" placeholder = "Type" class = "form-control" required>
-                                                    <br>
-                                                    <input type = "text" name = "no_rangka" value="<?=$norangka;?>" placeholder = "No Rangka" class = "form-control" required>
-                                                    <br>
-                                                    <input type = "text" name = "no_mesin" value="<?=$nomesin;?>" placeholder = "No Mesin" class = "form-control" required>
-                                                    <br>
-                                                    <input type = "text" name = "no_faktur" value="<?=$nofaktur;?>" placeholder = "No Faktur" class = "form-control" required>
-                                                    <br>
+                                                    STNK Atas Nama :
                                                     <input type = "text" name = "stnk_atasnama" value="<?=$stnk;?>" placeholder = "STNK Atas Nama" class = "form-control" required>
-                                                    <br>
-                                                    <input type = "text" name = "status_unit" value="<?=$status;?>" placeholder = "Status Unit" class = "form-control" required>
-                                                    <br>
+                                                    Seller : 
                                                     <input type = "text" name = "seller" value="<?=$seller;?>" placeholder = "Seller" class = "form-control" required>
-                                                    <br>
-                                                    <input type = "text" name = "unitout" value="<?=$unitout;?>" placeholder = "Unit Out" class = "form-control" required>
-                                                    <br>
+                                                    Harga Beli :
+                                                    <input type = "text" name = "hargabeli" value="<?=$hargabeli;?>" placeholder = "Harga Beli" class = "form-control" required>
+                                                    Harga Awal :
+                                                    <input type = "text" name = "hargaawal" value="<?=$hargaawal;?>" placeholder = "Harga Awal" class = "form-control" required>
+                                                    Buyer : 
                                                     <input type = "text" name = "buyer" value="<?=$buyer;?>" placeholder = "Buyer" class = "form-control" required>
+                                                    Cara Bayar : 
+                                                    <input type = "text" name = "cara_bayar" value="<?=$cara_bayar;?>" placeholder = "Cara Bayar" class = "form-control" required>
+                                                    Tanggal Bayar : 
+                                                    <input type = "text" name = "tgl_bayar" value="<?=$tgl_bayar;?>" placeholder = "Tanggal Bayar" class = "form-control" required>
+                                                    Nominal :
+                                                    <input type = "text" name = "nominal" value="<?=$nominal;?>" placeholder = "Nominal" class = "form-control" required>
                                                     <br>
                                                     </div>
                                                     
                                                     <!-- Modal footer -->
                                                     <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <input type="hidden" name = "idm" value="<?=$idm;?>">      
-                                                    <button type="submit" class="btn btn-primary" name = "update">Save changes</button>
+                                                    <input type="hidden" name = "idmng" value="<?=$idmng;?>">      
+                                                    <button type="submit" class="btn btn-primary" name = "updatemanage">Save changes</button>
                                                 </div>
                                                     </form>
                                                     
                                                 </div>
                                                 </div>
                                             </div>
+                                                <!-- The Modal Delete -->
+                                                <div class="modal fade" id="delete<?=$idmng;?>">
+                                                    <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                
+                                                    <!-- Modal Header -->
+                                                    <div class="modal-header">
+                                                    <h4 class="modal-title">Hapus?</h4>
+                                                    <button type="button" class="btn-close" aria-label="Close" data-dismiss="modal">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                    </div>
+                                                    
+                                                    <!-- Modal body -->
+                                                    <form method = "post">
+                                                    <div class="modal-body">
+                                                    Apakah anda yakin untuk menghapus data ini?
+                                                    <br>
+                                                    </div>
+                                                    
+                                                    <!-- Modal footer -->
+                                                    <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <input type="hidden" name = "idmng" value="<?=$idmng;?>">      
+                                                    <button type="submit" class="btn btn-Danger" name = "deletemanage">Hapus</button>
+                                                </div>
+                                                    </form>
+                                                    
+                                                </div>
+                                                </div>
+                                                </div>
                                         <?php
                                         };
                                     ?>
@@ -238,19 +267,29 @@ $imgUrl = "logo_tjm.PNG";
         <!-- Modal body -->
         <form method = "post">
         <div class="modal-body">
-          <input type = "text" name = "no_polisi" placeholder = "No Polisi" class = "form-control" required>
-          <input type = "text" name = "merk" placeholder = "Merk" class = "form-control" required>
-          <input type = "text" name = "type" placeholder = "Type" class = "form-control" required>
-          <input type = "text" name = "tahun" placeholder = "Tahun" class = "form-control" required>
-          <input type = "text" name = "no_rangka" placeholder = "No Rankga" class = "form-control" required>
-          <input type = "text" name = "no_mesin" placeholder = "No Mesin" class = "form-control" required>
-          <input type = "text" name = "no_faktur" placeholder = "No Faktur" class = "form-control" required>
-          <input type = "text" name = "stnk_atasnama" placeholder = "STNK Atas Nama" class = "form-control" required>
-          <input type = "text" name = "status_unit" placeholder = "Status Unit" class = "form-control" required>
-          <input type = "text" name = "unitin" placeholder = "Unit In" class = "form-control" required>
-          <input type = "text" name = "seller" placeholder = "Seller" class = "form-control" required>
-          <input type = "text" name = "unitout" placeholder = "Unit Out" class = "form-control">
-          <input type = "text" name = "buyer" placeholder = "Buyer" class = "form-control">
+            No Polisi : 
+            <input type = "text" name = "no_polisi" placeholder = "No Polisi" class = "form-control" required>
+            Merk : 
+            <input type = "text" name = "merk" placeholder = "Merk" class = "form-control" required>
+            Tahun : 
+            <input type = "text" name = "tahun" placeholder = "Tahun" class = "form-control" required>
+            STNK Atas Nama :
+            <input type = "text" name = "stnk_atasnama" placeholder = "STNK Atas Nama" class = "form-control" required>
+            Seller : 
+            <input type = "text" name = "seller" placeholder = "Seller" class = "form-control" required>
+            Harga Beli :
+            <input type = "text" name = "hargabeli" placeholder = "Harga Beli" class = "form-control" required>
+            Harga Awal :
+            <input type = "text" name = "hargaawal" placeholder = "Harga Awal" class = "form-control" required>
+            Buyer : 
+            <input type = "text" name = "buyer" placeholder = "Buyer" class = "form-control" required>
+            Cara Bayar : 
+            <input type = "text" name = "cara_bayar" placeholder = "Cara Bayar" class = "form-control" required>
+            Tanggal Bayar : 
+            <input type = "text" name = "tgl_bayar" placeholder = "Tanggal Bayar" class = "form-control" required>
+            Nominal :
+            <input type = "text" name = "nominal" placeholder = "Nominal" class = "form-control" required>
+            <br>
         </div>
         
         <!-- Modal footer -->

@@ -92,9 +92,7 @@ if(isset($_POST['addpicture'])){
     </script>
     ';
     }
-    }
-
-
+}
 
 //menambah data customer
 if(isset($_POST['addnewcustomer'])){
@@ -142,10 +140,31 @@ if(isset($_POST['update'])){
     }
 }
 
-//Updte Info Cutomer
+//Updte Detail
+
+if(isset($_POST['updatedetail'])){
+    $idc = $_POST['idp'];
+    $no_polisi = $_POST['no_polisi'];
+    $foto_mobil = $_POST['foto_mobil'];
+    $foto_norangka = $_POST['foto_norangka'];
+    $foto_nomesin = $_POST['foto_nomesin'];
+    $foto_stnk = $_POST['foto_stnk'];
+    $foto_bpkb = $_POST['foto_bpkb'];
+
+    $update = mysqli_query($conn, "update detail set no_polisi='$no_polisi', foto_mobil='$foto_mobil', foto_norangka='$foto_norangka', foto_nomesin='$foto_nomesin', 
+    foto_stnk='$foto_stnk',foto_bpkb='$foto_bpkb' where iddetail = '$idp'");
+    if($update){
+        header('location:detail.php');
+    }else{
+        echo'gagal';
+        header('location:detail.php');
+    }
+}
+
+//Update Info Customer
 
 if(isset($_POST['updatecustomer'])){
-    $idc = $_POST['idc'];
+    $idp = $_POST['idc'];
     $nama = $_POST['nama'];
     $notlp1 = $_POST['notlp1'];
     $notlp2 = $_POST['notlp2'];
@@ -153,7 +172,6 @@ if(isset($_POST['updatecustomer'])){
     $alamat = $_POST['alamat'];
     $deskripsi = $_POST['deskripsi'];
 
-    $update = mysqli_query($conn, "update customer set nama='$nama', notlp1='$notlp1', notlp2='$notlp2', notlp3='$notlp3', alamat='$alamat',deskripsi='$deskripsi' where idcustomer = '$idc'");
     if($update){
         header('location:customer.php');
     }else{
@@ -173,6 +191,48 @@ if(isset($_POST['delete'])){
     }else{
         echo'gagal';
         header('location:index.php');
+    }
+}
+
+//Delete Data Customer
+
+if(isset($_POST['deletecustomer'])){
+    $idc = $_POST['idc'];
+
+    $delete = mysqli_query($conn, "delete from customer where idcustomer = '$idc'");
+    if($delete){
+        header('location:customer.php');
+    }else{
+        echo'gagal';
+        header('location:customer.php');
+    }
+}
+
+//Delete Detail 
+
+if(isset($_POST['deletedetail'])){
+    $idp = $_POST['idp'];
+
+    $delete = mysqli_query($conn, "delete from customer where iddetail = '$idp'");
+    if($delete){
+        header('location:detail.php');
+    }else{
+        echo'gagal';
+        header('location:detail.php');
+    }
+}
+
+//Delete Info Management
+
+if(isset($_POST['deletemanage'])){
+    $idmng = $_POST['idmng'];
+
+    $delete = mysqli_query($conn, "delete from customer where idmanage = '$idmng'");
+    if($delete){
+        header('location:indexmanagement.php');
+    }else{
+        echo'gagal';
+        header('location:indexmanagement.php');
     }
 }
 ?>

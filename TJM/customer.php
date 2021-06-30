@@ -29,10 +29,6 @@ $imgUrl = "logo_tjm.PNG";
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-                <div class="input-group">
-                    <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
-                </div>
             </form>
             <!-- Navbar-->
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
@@ -124,7 +120,10 @@ $imgUrl = "logo_tjm.PNG";
                                                 <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#edit<?=$idc;?>">
                                                     Edit
                                                 </button>
-                                                <input type="hidden" name = "idmobilhapus" value="<?=$idc;?>">
+                                                <input type="hidden" name = "idcustomerhapus" value="<?=$idc;?>">
+                                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete<?=$idc;?>">
+                                                    Delete 
+                                                </button>
                                             </td>
                                         </tr>
                                                                                             
@@ -171,6 +170,37 @@ $imgUrl = "logo_tjm.PNG";
                                                 </div>
                                                 </div>
                                             </div>
+                                                <!-- The Modal Delete -->
+                                                <div class="modal fade" id="delete<?=$idc;?>">
+                                                    <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                
+                                                    <!-- Modal Header -->
+                                                    <div class="modal-header">
+                                                    <h4 class="modal-title">Hapus?</h4>
+                                                    <button type="button" class="btn-close" aria-label="Close" data-dismiss="modal">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                    </div>
+                                                    
+                                                    <!-- Modal body -->
+                                                    <form method = "post">
+                                                    <div class="modal-body">
+                                                    Apakah anda yakin untuk menghapus data ini?
+                                                    <br>
+                                                    </div>
+                                                    
+                                                    <!-- Modal footer -->
+                                                    <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <input type="hidden" name = "idc" value="<?=$idc;?>">      
+                                                    <button type="submit" class="btn btn-Danger" name = "deletecustomer">Hapus</button>
+                                                </div>
+                                                    </form>
+                                                    
+                                                </div>
+                                                </div>
+                                                </div>
                                         <?php
                                         };
                                     ?>
