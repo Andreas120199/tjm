@@ -47,7 +47,7 @@ $imgUrl = "logo_tjm.PNG";
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Core</div>
-                            <a class="nav-link" href="index.php">
+                            <a class="nav-link" href="indexkaryawan.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
                                 Main Page
                             </a>

@@ -189,7 +189,7 @@ $imgUrl = "logo_tjm.png";
                                                     
                                                     <!-- Modal body -->
                                                     <form method = "post"  enctype="multipart/form-data" >
-                                                    <div class="modal-body">
+                                                <div class="modal-body">
                                                     No Polisi: 
                                                     <input type = "text" name = "no_polisi" value="<?=$nopolisi;?>" placeholder = "No Polisi" class = "form-control" required>
                                                     Foto Mobil : 
@@ -202,7 +202,7 @@ $imgUrl = "logo_tjm.png";
                                                     <input type = "file" name = "foto_stnk" value="<?=$foto_stnk;?>" placeholder = "Scan STNK" class = "form-control" required>
                                                     Scan BPKB :
                                                     <input type = "file" name = "foto_bpkb" value="<?=$foto_bpkb;?>" placeholder = "Scan BPKB" class = "form-control" required>
-                                                    </div>
+                                                </div>
                                                     
                                                     <!-- Modal footer -->
                                                     <div class="modal-footer">

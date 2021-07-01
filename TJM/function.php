@@ -32,11 +32,11 @@ if(isset($_POST['addnewcar'])){
 //menambah foto
 if(isset($_POST['addpicture'])){
     $no_polisi = $_POST['no_polisi'];
-    $foto_mobil = $_POST['foto_mobil'];
-    $foto_norangka = $_POST['foto_norangka'];
-    $foto_nomesin = $_POST['foto_nomesin'];
-    $foto_stnk = $_POST['foto_stnk'];
-    $foto_bpkb = $_POST['foto_bpkb'];
+    $foto_mobil =  $_POST['foto_mobil'];
+    $foto_norangka =  $_POST['foto_norangka'];
+    $foto_nomesin =  $_POST['foto_nomesin'];
+    $foto_stnk =  $_POST['foto_stnk'];
+    $foto_bpkb =  $_POST['foto_bpkb'];
     echo($allowed_extention." ".$ekstensi);
     
     //Buat Gambar
