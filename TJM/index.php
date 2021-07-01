@@ -47,15 +47,15 @@ $imgUrl = "logo_tjm.PNG";
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Core</div>
                             <a class="nav-link" href="index.php">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
                                 Main Page
                             </a>
                             <a class="nav-link" href="detail.php">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fas fa-receipt"></i></div>
                                 Detail
                             </a>
                             <a class="nav-link" href="customer.php">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
                                 Customer
                             </a>
                         </div>
@@ -123,7 +123,7 @@ $imgUrl = "logo_tjm.PNG";
                                         
                                     ?>
                                         <tr>
-                                            <td><?=$nopolisi;?></td>
+                                            <td class="all"><?=$nopolisi;?></td>
                                             <td><?=$merk;?></td>
                                             <td><?=$tahun;?></td>
                                             <td><?=$type;?></td>
@@ -252,7 +252,7 @@ $imgUrl = "logo_tjm.PNG";
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="js/scripts.js"></script>
+        <script src="js/home/scripts.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
         <script src="assets/demo/chart-area-demo.js"></script>
         <script src="assets/demo/chart-bar-demo.js"></script>

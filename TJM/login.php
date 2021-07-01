@@ -75,15 +75,15 @@ if(!isset($_SESSION['log'])){
                                             <div class="form-floating mb-3">
                                             Username : 
                                                 <input class="form-control" name= "username" id="inputUsername" type="username" placeholder="name@example.com" />
-                                                <label for="inputUsername">Username</label>
+                                                <label for="inputUsername" style="color:gray;">Username</label>
                                             </div>
                                             <div class="form-floating mb-3">
                                             Password : 
                                                 <input class="form-control" name= "password" id="inputPassword" type="password" placeholder="Password" />
-                                                <label for="inputPassword">Password</label>
+                                                <label for="inputPassword" style="color:gray;">Password</label>
                                             </div>
                                             <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                                <button class="btn btn-primary" name= "login">Login</button>
+                                                <button class="btn btn-primary"  name= "login">Login</button>
                                             </div>
                                         </form>
                                     </div>

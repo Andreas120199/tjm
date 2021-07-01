@@ -120,40 +120,40 @@ $imgUrl = "logo_tjm.png";
                                             $foto_bpkb = $data['foto_bpkb'];
                                             $idp = $data['iddetail'];
 
-                                            //cek foto mobil
-                                            if($foto_mobil==null){
-                                                $img = "No Photo";
-                                            }else{
-                                                $img = '<img src="images/'.$foto_mobil.'" class="zoomable">';
-                                            }
+                                            // //cek foto mobil
+                                            // if($foto_mobil==null){
+                                            //     $foto_mobil = "No Photo";
+                                            // }else{
+                                            //     $foto_mobil = 'images/'.$foto_mobil.'" class="zoomable">';
+                                            // }
                                         
-                                            //cek foto no rangka
-                                            if($foto_norangka==null){
-                                                $img = "No Photo";
-                                            }else{
-                                                $img = '<img src="images/'.$foto_norangka.'" class="zoomable">';
-                                            }
+                                            // //cek foto no rangka
+                                            // if($foto_norangka==null){
+                                            //     $foto_norangka = "No Photo";
+                                            // }else{
+                                            //     $foto_norangka = '<img src="images/'.$foto_norangka.'" class="zoomable">';
+                                            // }
                                         
-                                            //cek foto no mesin
-                                            if($foto_nomesin==null){
-                                                $img = "No Photo";
-                                            }else{
-                                                $img = '<img src="images/'.$foto_nomesin.'" class="zoomable">';
-                                            }
+                                            // //cek foto no mesin
+                                            // if($foto_nomesin==null){
+                                            //     $foto_nomesin = "No Photo";
+                                            // }else{
+                                            //     $foto_nomesin = '<img src="images/'.$foto_nomesin.'" class="zoomable">';
+                                            // }
                                         
-                                            //cek foto stnk
-                                            if($foto_stnk==null){
-                                                $img = "No Photo";
-                                            }else{
-                                                $img = '<img src="images/'.$foto_stnk.'" class="zoomable">';
-                                            }
+                                            // //cek foto stnk
+                                            // if($foto_stnk==null){
+                                            //     $foto_stnk = "No Photo";
+                                            // }else{
+                                            //     $foto_stnk = '<img src="images/'.$foto_stnk.'" class="zoomable">';
+                                            // }
                                         
-                                            //cek foto bpkb
-                                            if($foto_bpkb==null){
-                                                $img = "No Photo";
-                                            }else{
-                                                $img = '<img src="images/'.$foto_bpkb.'" class="zoomable">';
-                                            }
+                                            // //cek foto bpkb
+                                            // if($foto_bpkb==null){
+                                            //     $foto_bpkb = "No Photo";
+                                            // }else{
+                                            //     $foto_bpkb = '<img src="images/'.$foto_bpkb.'" class="zoomable">';
+                                            // }
                                         
                                     ?>
                                         <tr>
