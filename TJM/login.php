@@ -73,10 +73,12 @@ if(!isset($_SESSION['log'])){
                                     <div class="card-body">
                                         <form method = "post">
                                             <div class="form-floating mb-3">
+                                            Username : 
                                                 <input class="form-control" name= "username" id="inputUsername" type="username" placeholder="name@example.com" />
                                                 <label for="inputUsername">Username</label>
                                             </div>
                                             <div class="form-floating mb-3">
+                                            Password : 
                                                 <input class="form-control" name= "password" id="inputPassword" type="password" placeholder="Password" />
                                                 <label for="inputPassword">Password</label>
                                             </div>
