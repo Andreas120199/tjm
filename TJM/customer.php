@@ -47,15 +47,15 @@ $imgUrl = "logo_tjm.PNG";
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Core</div>
                             <a class="nav-link" href="index.php">
-                                <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Main Page
                             </a>
                             <a class="nav-link" href="detail.php">
-                                <div class="sb-nav-link-icon"><i class="fas fa-receipt"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Detail
                             </a>
                             <a class="nav-link" href="customer.php">
-                                <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Customer
                             </a>
                         </div>
@@ -87,9 +87,9 @@ $imgUrl = "logo_tjm.PNG";
                                     <thead>
                                         <tr>
                                             <th>Nama</th>
-                                            <th>No Telepon 1 +62</th>
-                                            <th>No Telepon 2 +62</th>
-                                            <th>No Telepon 3 +62</th>
+                                            <th>No Telepon 1</th>
+                                            <th>No Telepon 2</th>
+                                            <th>No Telepon 3</th>
                                             <th>Alamat</th>
                                             <th>Keterangan</th>
                                             <th>Edit</th>

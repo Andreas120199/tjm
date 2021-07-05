@@ -58,23 +58,6 @@ $imgUrl = "logo_tjm.PNG";
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Customer
                             </a>
-                            <a class="nav-link" href="infokaryawan.php">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                Karyawan
-                            </a>
-                            <div class="sb-sidenav-menu-heading">Stock</div>
-                            <a class="nav-link" href="index.php">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                Info Stock
-                            </a>
-                            <a class="nav-link" href="detail.php">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                Barang Masuk
-                            </a>
-                            <a class="nav-link" href="customer.php">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                Barang Keluar
-                            </a>
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
@@ -88,84 +71,64 @@ $imgUrl = "logo_tjm.PNG";
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">PT. Taruna Jaya Motor</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">Main Page</li>
+                            <li class="breadcrumb-item"><a href="index.php">Main Page</a></li>
+                            <li class="breadcrumb-item active">Customer</li>
                         </ol>
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
                                 <!-- Button to Open the Modal -->
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-                                        Tambah Mobil
+                                        Tambah Data
                                     </button>
                             </div>
                             <div class="card-body">
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
-                                            <th>No Polisi</th>
-                                            <th>Merk</th>
-                                            <th>Tahun</th>
-                                            <th>Type</th>
-                                            <th>No Rangka</th>
-                                            <th>No Mesin</th>
-                                            <th>No Faktur</th>
-                                            <th>STNK Atas Nama</th>
-                                            <th>Status Unit</th>
-                                            <th>Unit In</th>
-                                            <th>Seller</th>
-                                            <th>Unit Out</th>
-                                            <th>Buyer</th>
+                                            <th>Nama</th>
+                                            <th>No Telepon 1 +62</th>
+                                            <th>No Telepon 2 +62</th>
+                                            <th>No Telepon 3 +62</th>
+                                            <th>Alamat</th>
+                                            <th>Keterangan</th>
                                             <th>Edit</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     <?php
                                     // buat tampilin data ke tabel //
-                                        $ambilsemuadata = mysqli_query($conn,"select * from info");
-                                        while($data=mysqli_fetch_array($ambilsemuadata)){
-                                            $nopolisi = $data['no_polisi'];
-                                            $merk = $data['merk'];
-                                            $type = $data['type'];
-                                            $tahun = $data['tahun'];
-                                            $norangka = $data['no_rangka'];
-                                            $nomesin = $data['no_mesin'];
-                                            $nofaktur = $data['no_faktur'];
-                                            $stnk = $data['stnk_atasnama'];
-                                            $status = $data['status_unit'];
-                                            $unitin = $data['unitin'];
-                                            $seller = $data['seller'];
-                                            $unitout = $data['unitout'];
-                                            $buyer = $data['buyer'];
-                                            $idm = $data['idmobil'];
+                                        $ambildatacustomer = mysqli_query($conn,"select * from customer");
+                                        while($datacustomer=mysqli_fetch_array($ambildatacustomer)){
+                                            $nama = $datacustomer['nama'];
+                                            $notlp1 = $datacustomer['notlp1'];
+                                            $notlp2 = $datacustomer['notlp2'];
+                                            $notlp3 = $datacustomer['notlp3'];
+                                            $alamat = $datacustomer['alamat'];
+                                            $deskripsi = $datacustomer['deskripsi'];
+                                            $idc = $datacustomer['idcustomer'];
                                         
                                     ?>
                                         <tr>
-                                            <td><?=$nopolisi;?></td>
-                                            <td><?=$merk;?></td>
-                                            <td><?=$tahun;?></td>
-                                            <td><?=$type;?></td>
-                                            <td><?=$norangka;?></td>
-                                            <td><?=$nomesin;?></td>
-                                            <td><?=$nofaktur;?></td>
-                                            <td><?=$stnk;?></td>
-                                            <td><?=$status;?></td>
-                                            <td><?=$unitin;?></td>
-                                            <td><?=$seller;?></td>
-                                            <td><?=$unitout;?></td>
-                                            <td><?=$buyer;?></td>
+                                            <td><?=$nama;?></td>
+                                            <td><?=$notlp1;?></td>
+                                            <td><?=$notlp2;?></td>
+                                            <td><?=$notlp3;?></td>
+                                            <td><?=$alamat;?></td>
+                                            <td><?=$deskripsi;?></td>
                                             <td>
-                                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#edit<?=$idm;?>">
+                                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#edit<?=$idc;?>">
                                                     Edit
                                                 </button>
-                                                <input type="hidden" name = "idmobilhapus" value="<?=$idm;?>">
-                                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete<?=$idm;?>">
+                                                <input type="hidden" name = "idcustomerhapus" value="<?=$idc;?>">
+                                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete<?=$idc;?>">
                                                     Delete 
                                                 </button>
                                             </td>
                                         </tr>
                                                                                             
                                                 <!-- The Modal Edit -->
-                                                <div class="modal fade" id="edit<?=$idm;?>">
+                                                <div class="modal fade" id="edit<?=$idc;?>">
                                                     <div class="modal-dialog">
                                                     <div class="modal-content">
                                                 
@@ -180,38 +143,27 @@ $imgUrl = "logo_tjm.PNG";
                                                     <!-- Modal body -->
                                                     <form method = "post">
                                                     <div class="modal-body">
-                                                    No Polisi : 
-                                                    <input type = "text" name = "no_polisi" value="<?=$nopolisi;?>" placeholder = "No Polisi" class = "form-control" required>
-                                                    Merk : 
-                                                    <input type = "text" name = "merk" value="<?=$merk;?>" placeholder = "Merk" class = "form-control" required>
-                                                    Tahun : 
-                                                    <input type = "text" name = "tahun" value="<?=$tahun;?>" placeholder = "Tahun" class = "form-control" required>
-                                                    Type : 
-                                                    <input type = "text" name = "type" value="<?=$type;?>" placeholder = "Type" class = "form-control" required>
-                                                    No Rangka : 
-                                                    <input type = "text" name = "no_rangka" value="<?=$norangka;?>" placeholder = "No Rangka" class = "form-control" required>
-                                                    No Mesin : 
-                                                    <input type = "text" name = "no_mesin" value="<?=$nomesin;?>" placeholder = "No Mesin" class = "form-control" required>
-                                                    No Faktur : 
-                                                    <input type = "text" name = "no_faktur" value="<?=$nofaktur;?>" placeholder = "No Faktur" class = "form-control" required>
-                                                    STNK Atas Nama : 
-                                                    <input type = "text" name = "stnk_atasnama" value="<?=$stnk;?>" placeholder = "STNK Atas Nama" class = "form-control" required>
-                                                    Status Unit : 
-                                                    <input type = "text" name = "status_unit" value="<?=$status;?>" placeholder = "Status Unit" class = "form-control" required>
-                                                    Seller : 
-                                                    <input type = "text" name = "seller" value="<?=$seller;?>" placeholder = "Seller" class = "form-control" required>
-                                                    Unit Out : 
-                                                    <input type = "text" name = "unitout" value="<?=$unitout;?>" placeholder = "Unit Out" class = "form-control" required>
-                                                    Buyer : 
-                                                    <input type = "text" name = "buyer" value="<?=$buyer;?>" placeholder = "Buyer" class = "form-control" required>
+                                                    Nama : 
+                                                    <input type = "text" name = "nama" value="<?=$nama;?>" placeholder = "Nama" class = "form-control" required>
+                                                    <br>
+                                                    Nomor Telepon :
+                                                    <input type = "text" name = "notlp1" value="<?=$notlp1;?>" placeholder = "No Telepon 1" class = "form-control" required>
+                                                    <input type = "text" name = "notlp2" value="<?=$notlp2;?>" placeholder = "No Telepon 2" class = "form-control">
+                                                    <input type = "text" name = "notlp3" value="<?=$notlp3;?>" placeholder = "No Telepon 3" class = "form-control">
+                                                    <br>
+                                                    Alamat :
+                                                    <input type = "text" name = "alamat" value="<?=$alamat;?>" placeholder = "Alamat" class = "form-control" required>
+                                                    <br>
+                                                    Keterangan :
+                                                    <input type = "text" name = "deskripsi" value="<?=$deskripsi;?>" placeholder = "Keterangan" class = "form-control">
                                                     <br>
                                                     </div>
                                                     
                                                     <!-- Modal footer -->
                                                     <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <input type="hidden" name = "idm" value="<?=$idm;?>">      
-                                                    <button type="submit" class="btn btn-primary" name = "update">Save changes</button>
+                                                    <input type="hidden" name = "idc" value="<?=$idc;?>">      
+                                                    <button type="submit" class="btn btn-primary" name = "updatecustomer">Save changes</button>
                                                 </div>
                                                     </form>
                                                     
@@ -219,7 +171,7 @@ $imgUrl = "logo_tjm.PNG";
                                                 </div>
                                             </div>
                                                 <!-- The Modal Delete -->
-                                                <div class="modal fade" id="delete<?=$idm;?>">
+                                                <div class="modal fade" id="delete<?=$idc;?>">
                                                     <div class="modal-dialog">
                                                     <div class="modal-content">
                                                 
@@ -241,8 +193,8 @@ $imgUrl = "logo_tjm.PNG";
                                                     <!-- Modal footer -->
                                                     <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <input type="hidden" name = "idm" value="<?=$idm;?>">      
-                                                    <button type="submit" class="btn btn-Danger" name = "delete">Hapus</button>
+                                                    <input type="hidden" name = "idc" value="<?=$idc;?>">      
+                                                    <button type="submit" class="btn btn-Danger" name = "deletecustomer">Hapus</button>
                                                 </div>
                                                     </form>
                                                     
@@ -283,7 +235,7 @@ $imgUrl = "logo_tjm.PNG";
       
         <!-- Modal Header -->
         <div class="modal-header">
-          <h4 class="modal-title">Tambah Mobil</h4>
+          <h4 class="modal-title">Tambah Data</h4>
           <button type="button" class="btn-close" aria-label="Close" data-dismiss="modal">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -292,38 +244,27 @@ $imgUrl = "logo_tjm.PNG";
         <!-- Modal body -->
         <form method = "post">
         <div class="modal-body">
-        No Polisi : 
-          <input type = "text" name = "no_polisi" placeholder = "No Polisi" class = "form-control" required>
-          Merk : 
-          <input type = "text" name = "merk" placeholder = "Merk" class = "form-control" required>
-          Type :
-          <input type = "text" name = "type" placeholder = "Type" class = "form-control" required>
-          Tahun : 
-          <input type = "text" name = "tahun" placeholder = "Tahun" class = "form-control" required>
-          No Rangka :
-          <input type = "text" name = "no_rangka" placeholder = "No Rankga" class = "form-control" required>
-          No Mesin : 
-          <input type = "text" name = "no_mesin" placeholder = "No Mesin" class = "form-control" required>
-          No Faktur : 
-          <input type = "text" name = "no_faktur" placeholder = "No Faktur" class = "form-control" required>
-          STNK Atas Nama :
-          <input type = "text" name = "stnk_atasnama" placeholder = "STNK Atas Nama" class = "form-control" required>
-          Status Unit : 
-          <input type = "text" name = "status_unit" placeholder = "Status Unit" class = "form-control" required>
-          Unit In : 
-          <input type = "text" name = "unitin" placeholder = "Unit In" class = "form-control" required>
-          Seller : 
-          <input type = "text" name = "seller" placeholder = "Seller" class = "form-control" required>
-          Unit Out : 
-          <input type = "text" name = "unitout" placeholder = "Unit Out" class = "form-control">
-          Buyer : 
-          <input type = "text" name = "buyer" placeholder = "Buyer" class = "form-control">
+         
+          Nama :
+          <input type = "text" name = "nama" placeholder = "Nama" class = "form-control" required>
+          <br>
+          Nomor Telepon :
+          <input type = "text" name = "notlp1" placeholder = "No Telepon 1" class = "form-control" required>
+          <input type = "text" name = "notlp2" placeholder = "No Telepon 2" class = "form-control" >
+          <input type = "text" name = "notlp3" placeholder = "No Telepon 3" class = "form-control" >
+          <br>
+          Alamat : 
+          <input type = "text" name = "alamat" placeholder = "Alamat" class = "form-control" required>
+          <br>
+          Keterangan : 
+          <input type = "text" name = "deskripsi" placeholder = "Keterangan" class = "form-control">
+          <br>
         </div>
         
         <!-- Modal footer -->
         <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" name = "addnewcar">Save changes</button>
+        <button type="submit" class="btn btn-primary" name = "addnewcustomer">Save changes</button>
       </div>
         </form>
         

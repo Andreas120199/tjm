@@ -1,54 +1,3 @@
-<?php
-require 'function.php';
-
-//cek login
-if(isset($_POST['login'])){
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-
-    //pencocokan database
-    $cekdatabase = mysqli_query($conn, "SELECT * FROM login where username = '$username' and password = '$password'");
-    //hitung jumlah data
-    $hitung = mysqli_num_rows($cekdatabase);
-
-    if($hitung>0){
-        $_SESSION['log'] = 'True';
-        $data = mysqli_fetch_assoc($cekdatabase);
-    // cek jika user login sebagai admin
-	if($data['level']=="admin"){
- 
-		// buat session login dan username
-		$_SESSION['username'] = $username;
-		$_SESSION['level'] = "admin";
-		// alihkan ke halaman dashboard admin
-		header("location:index.php");
- 
-	// cek jika user login sebagai karyawan
-	}else if($data['level']=="karyawan"){
-		// buat session login dan username
-		$_SESSION['username'] = $username;
-		$_SESSION['level'] = "karyawan";
-		// alihkan ke halaman dashboard karyawan
-		header("location:indexkaryawan.php");
- 
-	// cek jika user login sebagai management
-	}else if($data['level']=="management"){
-		// buat session login dan username
-		$_SESSION['username'] = $username;
-		$_SESSION['level'] = "management";
-		// alihkan ke halaman dashboard management
-		header("location:indexmanagement.php");
-    } else {
-        header('location:login.php');   
-    };
-};
-};
-
-if(!isset($_SESSION['log'])){
-} else {
-}
-
-?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -57,7 +6,7 @@ if(!isset($_SESSION['log'])){
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Login</title>
+        <title>Login - SB Admin</title>
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
     </head>
@@ -71,23 +20,27 @@ if(!isset($_SESSION['log'])){
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                                     <div class="card-header"><h3 class="text-center font-weight-light my-4">Login</h3></div>
                                     <div class="card-body">
-                                        <form method = "post">
+                                        <form>
                                             <div class="form-floating mb-3">
-                                            Username : 
-                                                <input class="form-control" name= "username" id="inputUsername" type="username" placeholder="name@example.com" />
-                                                <label for="inputUsername">Username</label>
+                                                <input class="form-control" id="inputEmail" type="email" placeholder="name@example.com" />
+                                                <label for="inputEmail">Email address</label>
                                             </div>
                                             <div class="form-floating mb-3">
-                                            Password : 
-                                                <input class="form-control" name= "password" id="inputPassword" type="password" placeholder="Password" />
+                                                <input class="form-control" id="inputPassword" type="password" placeholder="Password" />
                                                 <label for="inputPassword">Password</label>
                                             </div>
+                                            <div class="form-check mb-3">
+                                                <input class="form-check-input" id="inputRememberPassword" type="checkbox" value="" />
+                                                <label class="form-check-label" for="inputRememberPassword">Remember Password</label>
+                                            </div>
                                             <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                                <button class="btn btn-primary" name= "login">Login</button>
+                                                <a class="small" href="password.html">Forgot Password?</a>
+                                                <a class="btn btn-primary" href="index.html">Login</a>
                                             </div>
                                         </form>
                                     </div>
                                     <div class="card-footer text-center py-3">
+                                        <div class="small"><a href="register.html">Need an account? Sign up!</a></div>
                                     </div>
                                 </div>
                             </div>
@@ -99,7 +52,12 @@ if(!isset($_SESSION['log'])){
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Created by &copy; Andreas Michael</div>
+                            <div class="text-muted">Copyright &copy; Your Website 2021</div>
+                            <div>
+                                <a href="#">Privacy Policy</a>
+                                &middot;
+                                <a href="#">Terms &amp; Conditions</a>
+                            </div>
                         </div>
                     </div>
                 </footer>

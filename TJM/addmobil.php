@@ -58,23 +58,6 @@ $imgUrl = "logo_tjm.PNG";
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Customer
                             </a>
-                            <a class="nav-link" href="infokaryawan.php">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                Karyawan
-                            </a>
-                            <div class="sb-sidenav-menu-heading">Stock</div>
-                            <a class="nav-link" href="index.php">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                Info Stock
-                            </a>
-                            <a class="nav-link" href="detail.php">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                Barang Masuk
-                            </a>
-                            <a class="nav-link" href="customer.php">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                Barang Keluar
-                            </a>
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">

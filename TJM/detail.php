@@ -57,15 +57,15 @@ $imgUrl = "logo_tjm.png";
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Core</div>
                             <a class="nav-link" href="index.php">
-                                <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Main Page
                             </a>
                             <a class="nav-link" href="detail.php">
-                                <div class="sb-nav-link-icon"><i class="fas fa-receipt"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Detail
                             </a>
                             <a class="nav-link" href="customer.php">
-                                <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Customer
                             </a>
                         </div>
@@ -118,64 +118,61 @@ $imgUrl = "logo_tjm.png";
                                             $foto_nomesin = $data['foto_nomesin'];
                                             $foto_stnk = $data['foto_stnk'];
                                             $foto_bpkb = $data['foto_bpkb'];
-                                            $idp = $data['iddetail'];
+                                            $idet = $data['iddetail'];
 
-                                            // //cek foto mobil
-                                            // if($foto_mobil==null){
-                                            //     $foto_mobil = "No Photo";
-                                            // }else{
-                                            //     $foto_mobil = 'images/'.$foto_mobil.'" class="zoomable">';
-                                            // }
+                                            //cek foto mobil
+                                            if($foto_mobil==null){
+                                                $img = "No Photo";
+                                            }else{
+                                                $img = '<img src="images/'.$foto_mobil.'" class="zoomable">';
+                                            }
                                         
-                                            // //cek foto no rangka
-                                            // if($foto_norangka==null){
-                                            //     $foto_norangka = "No Photo";
-                                            // }else{
-                                            //     $foto_norangka = '<img src="images/'.$foto_norangka.'" class="zoomable">';
-                                            // }
+                                            //cek foto no rangka
+                                            if($foto_norangka==null){
+                                                $img = "No Photo";
+                                            }else{
+                                                $img = '<img src="images/'.$foto_norangka.'" class="zoomable">';
+                                            }
                                         
-                                            // //cek foto no mesin
-                                            // if($foto_nomesin==null){
-                                            //     $foto_nomesin = "No Photo";
-                                            // }else{
-                                            //     $foto_nomesin = '<img src="images/'.$foto_nomesin.'" class="zoomable">';
-                                            // }
+                                            //cek foto no mesin
+                                            if($foto_nomesin==null){
+                                                $img = "No Photo";
+                                            }else{
+                                                $img = '<img src="images/'.$foto_nomesin.'" class="zoomable">';
+                                            }
                                         
-                                            // //cek foto stnk
-                                            // if($foto_stnk==null){
-                                            //     $foto_stnk = "No Photo";
-                                            // }else{
-                                            //     $foto_stnk = '<img src="images/'.$foto_stnk.'" class="zoomable">';
-                                            // }
+                                            //cek foto stnk
+                                            if($foto_stnk==null){
+                                                $img = "No Photo";
+                                            }else{
+                                                $img = '<img src="images/'.$foto_stnk.'" class="zoomable">';
+                                            }
                                         
-                                            // //cek foto bpkb
-                                            // if($foto_bpkb==null){
-                                            //     $foto_bpkb = "No Photo";
-                                            // }else{
-                                            //     $foto_bpkb = '<img src="images/'.$foto_bpkb.'" class="zoomable">';
-                                            // }
+                                            //cek foto bpkb
+                                            if($foto_bpkb==null){
+                                                $img = "No Photo";
+                                            }else{
+                                                $img = '<img src="images/'.$foto_bpkb.'" class="zoomable">';
+                                            }
                                         
                                     ?>
                                         <tr>
                                             <td><?=$nopolisi;?></td>
-                                            <td><img src="<?php echo $foto_mobil;?>" alt="HTML tutorial" style="width:42px;height:42px;"></td>
-                                            <td><img src="<?php echo $foto_norangka;?>" alt="HTML tutorial" style="width:42px;height:42px;"></td>
-                                            <td><img src="<?php echo $foto_nomesin;?>" alt="HTML tutorial" style="width:42px;height:42px;"></td>
-                                            <td><img src="<?php echo $foto_stnk;?>" alt="HTML tutorial" style="width:42px;height:42px;"></td>
-                                            <td><img src="<?php echo $foto_bpkb;?>" alt="HTML tutorial" style="width:42px;height:42px;"></td>
+                                            <td><img src="<?php echo $foto_mobil;?>" alt="HTML tutorial" style="width:250px;height:250px;"></td>
+                                            <td><img src="<?php echo $foto_norangka;?>" alt="HTML tutorial" style="width:250px;height:250px;"></td>
+                                            <td><img src="<?php echo $foto_nomesin;?>" alt="HTML tutorial" style="width:250px;height:250px;"></td>
+                                            <td><img src="<?php echo $foto_stnk;?>" alt="HTML tutorial" style="width:250px;height:250px;"></td>
+                                            <td><img src="<?php echo $foto_bpkb;?>" alt="HTML tutorial" style="width:250px;height:250px;"></td>
                                             <td>
-                                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#edit<?=$idp;?>">
-                                                    Edit
-                                                </button>
-                                                <input type="hidden" name = "iddetailhapus" value="<?=$idp;?>">
-                                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete<?=$idp;?>">
+                                                <input type="hidden" name = "iddetailhapus" value="<?=$idet;?>">
+                                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete<?=$idet;?>">
                                                     Delete 
                                                 </button>
                                             </td>
                                         </tr>
                                                                                             
                                                 <!-- The Modal Edit -->
-                                                <div class="modal fade" id="edit<?=$idp;?>">
+                                                <div class="modal fade" id="edit<?=$idet;?>">
                                                     <div class="modal-dialog">
                                                     <div class="modal-content">
                                                 
@@ -189,7 +186,7 @@ $imgUrl = "logo_tjm.png";
                                                     
                                                     <!-- Modal body -->
                                                     <form method = "post"  enctype="multipart/form-data" >
-                                                <div class="modal-body">
+                                                    <div class="modal-body">
                                                     No Polisi: 
                                                     <input type = "text" name = "no_polisi" value="<?=$nopolisi;?>" placeholder = "No Polisi" class = "form-control" required>
                                                     Foto Mobil : 
@@ -202,12 +199,12 @@ $imgUrl = "logo_tjm.png";
                                                     <input type = "file" name = "foto_stnk" value="<?=$foto_stnk;?>" placeholder = "Scan STNK" class = "form-control" required>
                                                     Scan BPKB :
                                                     <input type = "file" name = "foto_bpkb" value="<?=$foto_bpkb;?>" placeholder = "Scan BPKB" class = "form-control" required>
-                                                </div>
+                                                    </div>
                                                     
                                                     <!-- Modal footer -->
                                                     <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <input type="hidden" name = "idp" value="<?=$idp;?>">      
+                                                    <input type="hidden" name = "idet" value="<?=$idet;?>">      
                                                     <button type="submit" class="btn btn-primary" name = "updatedetail">Save changes</button>
                                                 </div>
                                                     </form>
@@ -216,7 +213,7 @@ $imgUrl = "logo_tjm.png";
                                                 </div>
                                             </div>  
                                                 <!-- The Modal Delete -->
-                                                <div class="modal fade" id="delete<?=$idp;?>">
+                                                <div class="modal fade" id="delete<?=$idet;?>">
                                                     <div class="modal-dialog">
                                                     <div class="modal-content">
                                                 
@@ -238,7 +235,7 @@ $imgUrl = "logo_tjm.png";
                                                     <!-- Modal footer -->
                                                     <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <input type="hidden" name = "idp" value="<?=$idp;?>">      
+                                                    <input type="hidden" name = "idet" value="<?=$idet;?>">      
                                                     <button type="submit" class="btn btn-Danger" name = "deletephoto">Hapus</button>
                                                 </div>
                                                     </form>
@@ -265,6 +262,11 @@ $imgUrl = "logo_tjm.png";
                 </footer>
             </div>
         </div>
+        <!-- Optional JavaScript -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
