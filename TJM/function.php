@@ -162,6 +162,26 @@ if(isset($_POST['addpicture'])){
 //     }
 // }
 
+//menambah data stock
+if(isset($_POST['addnewstock'])){
+    $nama = $_POST['nama'];
+    $jenis = $_POST['jenis'];
+    $merk = $_POST['merk'];
+    $ukuran = $_POST['ukuran'];
+    $stock = $_POST['stock'];
+    $satuan = $_POST['satuan'];
+    $lokasi = $_POST['lokasi'];
+    
+    $addtotable = mysqli_query($conn, "insert into stock (nama, jenis, merk, ukuran, stock, satuan, lokasi)
+    values ('$nama', '$jenis', '$merk', '$ukuran', '$stock', '$satuan', '$lokasi')");
+    if($addtotable){
+        header('location:stock.php');
+    }else{
+        echo'gagal';
+        header('location:stock.php');
+    }
+}
+
 //menambah data customer
 if(isset($_POST['addnewcustomer'])){
     $nama = $_POST['nama'];
@@ -171,7 +191,7 @@ if(isset($_POST['addnewcustomer'])){
     $alamat = $_POST['alamat'];
     $deskripsi = $_POST['deskripsi'];
     
-    $addtotable = mysqli_query($conn, "insert into customer (nama, notlp1, notlp2, notlp3, alamat, deskripsi)
+    $addtotable = mysqli_query($conn, "insert into stock (nama, notlp1, notlp2, notlp3, alamat, deskripsi)
     values ('$nama', '$notlp1', '$notlp2', '$notlp3', '$alamat', '$deskripsi')");
     if($addtotable){
         header('location:customer.php');
@@ -268,6 +288,28 @@ if(isset($_POST['updatecustomer'])){
     }
 }
 
+//Update Info Stock
+
+if(isset($_POST['updatestock'])){
+    $ids = $_POST['ids'];
+    $nama = $_POST['nama'];
+    $jenis = $_POST['jenis'];
+    $merk = $_POST['merk'];
+    $ukuran = $_POST['ukuran'];
+    $stock = $_POST['stock'];
+    $satuan = $_POST['satuan'];
+    $lokasi = $_POST['lokasi'];
+
+    $update = mysqli_query($conn, "update stock set nama='$nama', jenis='$jenis', merk='$merk', ukuran='$ukuran', stock='$stock',satuan='$satuan' ,lokasi='$lokasi'
+     where idstock = '$ids'");
+    if($update){
+        header('location:stock.php');
+    }else{
+        echo'gagal';
+        header('location:stock.php');
+    }
+}
+
 //Update Info Karyawan
 
 if(isset($_POST['updatekaryawan'])){
@@ -299,6 +341,20 @@ if(isset($_POST['delete'])){
     }else{
         echo'gagal';
         header('location:index.php');
+    }
+}
+
+//Delete Data Stock
+
+if(isset($_POST['deletestock'])){
+    $ids = $_POST['ids'];
+
+    $delete = mysqli_query($conn, "delete from stock where idstock = '$ids'");
+    if($delete){
+        header('location:stock.php');
+    }else{
+        echo'gagal';
+        header('location:stock.php');
     }
 }
 

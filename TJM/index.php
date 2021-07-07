@@ -24,11 +24,33 @@ $imgUrl = "logo_tjm.PNG";
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="index.php" >Taruna Jaya Motor</a>
+            <a class="navbar-brand ps-3" href="index.php" >
+            <img src="logo_tjm.png" width="200px"\></a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+            <div class="small">
+                        <ul class="notification-area pull-right">
+                            <li><h3><div class="date">
+								<script type='text/javascript'>
+						<!--
+						var months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+						var myDays = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+						var date = new Date();
+						var day = date.getDate();
+						var month = date.getMonth();
+						var thisDay = date.getDay(),
+							thisDay = myDays[thisDay];
+						var yy = date.getYear();
+						var year = (yy < 1000) ? yy + 1900 : yy;
+						document.write(thisDay + ', ' + day + ' ' + months[month] + ' ' + year);		
+						//-->
+						</script></b></div></h3>
+
+						</li>
+                        </ul>
+                    </div>
             </form>
             <!-- Navbar-->
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
@@ -63,7 +85,7 @@ $imgUrl = "logo_tjm.PNG";
                                 Karyawan
                             </a>
                             <div class="sb-sidenav-menu-heading">Stock</div>
-                            <a class="nav-link" href="index.php">
+                            <a class="nav-link" href="stock.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Info Stock
                             </a>
@@ -78,7 +100,7 @@ $imgUrl = "logo_tjm.PNG";
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
-                        <div class="small">Logged in as: </div>
+                        <div class="small">Logged in as: <?=$_SESSION['username'];?></div>
                         Start Bootstrap
                     </div>
                 </nav>

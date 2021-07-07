@@ -1,7 +1,7 @@
 <?php
 require 'function.php';
 require 'cek.php';
-$imgUrl = "logo_tjm.png"; 
+$imgUrl = "logo_tjm.PNG"; 
 ?> 
 ?>
 
@@ -20,25 +20,37 @@ $imgUrl = "logo_tjm.png";
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        <!-- buat kasih batasan gambar -->
-        <style>
-            .zoomable{
-                width: 250px;
-            }
-            .zoomable:hover{
-                transform: scale(2.5);
-                transition: 0.5s ease;
-            }
-        </style>
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="index.php" >Taruna Jaya Motor</a>
+            <a class="navbar-brand ps-3" href="index.php" >
+            <img src="logo_tjm.png" width="200px"\></a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+            <div class="small">
+                        <ul class="notification-area pull-right">
+                            <li><h3><div class="date">
+								<script type='text/javascript'>
+						<!--
+						var months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+						var myDays = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+						var date = new Date();
+						var day = date.getDate();
+						var month = date.getMonth();
+						var thisDay = date.getDay(),
+							thisDay = myDays[thisDay];
+						var yy = date.getYear();
+						var year = (yy < 1000) ? yy + 1900 : yy;
+						document.write(thisDay + ', ' + day + ' ' + months[month] + ' ' + year);		
+						//-->
+						</script></b></div></h3>
+
+						</li>
+                        </ul>
+                    </div>
             </form>
             <!-- Navbar-->
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
@@ -68,10 +80,27 @@ $imgUrl = "logo_tjm.png";
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Customer
                             </a>
+                            <a class="nav-link" href="infokaryawan.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                Karyawan
+                            </a>
+                            <div class="sb-sidenav-menu-heading">Stock</div>
+                            <a class="nav-link" href="stock.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                Info Stock
+                            </a>
+                            <a class="nav-link" href="detail.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                Barang Masuk
+                            </a>
+                            <a class="nav-link" href="customer.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                Barang Keluar
+                            </a>
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
-                        <div class="small">Logged in as: </div>
+                        <div class="small">Logged in as: <?=$_SESSION['username'];?></div>
                         Start Bootstrap
                     </div>
                 </nav>
@@ -81,101 +110,66 @@ $imgUrl = "logo_tjm.png";
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">PT. Taruna Jaya Motor</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item"><a href="index.php">Main Page</a></li>
-                            <li class="breadcrumb-item active">Customer</li>
+                            <li class="breadcrumb-item active">Main Page</li>
                         </ol>
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
                                 <!-- Button to Open the Modal -->
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-                                        Tambah Data
+                                        Tambah Mobil
                                     </button>
                             </div>
                             <div class="card-body">
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
-                                            <th>No Polisi</th>
-                                            <th>Foto Mobil</th>
-                                            <th>Foto No Rangka</th>
-                                            <th>Foto No Mesin</th>
-                                            <th>Scan STNK</th>
-                                            <th>Scan BPKB</th>
+                                            <th>Nama</th>
+                                            <th>Jenis</th>
+                                            <th>Merk</th>
+                                            <th>Ukuran</th>
+                                            <th>Stock</th>
+                                            <th>Satuan</th>
+                                            <th>Lokasi</th>
                                             <th>Edit</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     <?php
                                     // buat tampilin data ke tabel //
-                                    //, info where info.no_polisi = detail.no_polisi
-                                        $detail_data = mysqli_query($conn,"select * from detail");
-                                        // $detail_data_fetch =mysqli_fetch_array($detail_data);
-                                        while($data=mysqli_fetch_array($detail_data)){
-                                            $nopolisi = $data['no_polisi'];
-                                            $foto_mobil = $data['foto_mobil'];
-                                            $foto_norangka = $data['foto_norangka'];
-                                            $foto_nomesin = $data['foto_nomesin'];
-                                            $foto_stnk = $data['foto_stnk'];
-                                            $foto_bpkb = $data['foto_bpkb'];
-                                            $idp = $data['iddetail'];
-
-                                            //cek foto mobil
-                                            if($foto_mobil==null){
-                                                $img = "No Photo";
-                                            }else{
-                                                $img = '<img src="images/'.$foto_mobil.'" class="zoomable">';
-                                            }
-                                        
-                                            //cek foto no rangka
-                                            if($foto_norangka==null){
-                                                $img = "No Photo";
-                                            }else{
-                                                $img = '<img src="images/'.$foto_norangka.'" class="zoomable">';
-                                            }
-                                        
-                                            //cek foto no mesin
-                                            if($foto_nomesin==null){
-                                                $img = "No Photo";
-                                            }else{
-                                                $img = '<img src="images/'.$foto_nomesin.'" class="zoomable">';
-                                            }
-                                        
-                                            //cek foto stnk
-                                            if($foto_stnk==null){
-                                                $img = "No Photo";
-                                            }else{
-                                                $img = '<img src="images/'.$foto_stnk.'" class="zoomable">';
-                                            }
-                                        
-                                            //cek foto bpkb
-                                            if($foto_bpkb==null){
-                                                $img = "No Photo";
-                                            }else{
-                                                $img = '<img src="images/'.$foto_bpkb.'" class="zoomable">';
-                                            }
+                                        $ambilsemuadata = mysqli_query($conn,"select * from stock");
+                                        while($data=mysqli_fetch_array($ambilsemuadata)){
+                                            $nama = $data['nama'];
+                                            $jenis = $data['jenis'];
+                                            $merk = $data['merk'];
+                                            $ukuran = $data['ukuran'];
+                                            $stock = $data['stock'];
+                                            $satuan = $data['satuan'];
+                                            $lokasi = $data['lokasi'];
+                                            $ids = $data['idstock'];
                                         
                                     ?>
                                         <tr>
-                                            <td><?=$nopolisi;?></td>
-                                            <td><img src="<?php echo $foto_mobil;?>" alt="HTML tutorial" style="width:42px;height:42px;"></td>
-                                            <td><img src="<?php echo $foto_norangka;?>" alt="HTML tutorial" style="width:42px;height:42px;"></td>
-                                            <td><img src="<?php echo $foto_nomesin;?>" alt="HTML tutorial" style="width:42px;height:42px;"></td>
-                                            <td><img src="<?php echo $foto_stnk;?>" alt="HTML tutorial" style="width:42px;height:42px;"></td>
-                                            <td><img src="<?php echo $foto_bpkb;?>" alt="HTML tutorial" style="width:42px;height:42px;"></td>
+                                            <td><?=$nama;?></td>
+                                            <td><?=$jenis;?></td>
+                                            <td><?=$merk;?></td>
+                                            <td><?=$ukuran;?></td>
+                                            <td><?=$stock;?></td>
+                                            <td><?=$satuan;?></td>
+                                            <td><?=$lokasi;?></td>
                                             <td>
-                                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#edit<?=$idp;?>">
+                                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#edit<?=$ids;?>">
                                                     Edit
                                                 </button>
-                                                <input type="hidden" name = "iddetailhapus" value="<?=$idp;?>">
-                                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete<?=$idp;?>">
+                                                <input type="hidden" name = "idstockhapus" value="<?=$ids;?>">
+                                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete<?=$ids;?>">
                                                     Delete 
                                                 </button>
                                             </td>
                                         </tr>
                                                                                             
                                                 <!-- The Modal Edit -->
-                                                <div class="modal fade" id="edit<?=$idp;?>">
+                                                <div class="modal fade" id="edit<?=$ids;?>">
                                                     <div class="modal-dialog">
                                                     <div class="modal-content">
                                                 
@@ -188,35 +182,38 @@ $imgUrl = "logo_tjm.png";
                                                     </div>
                                                     
                                                     <!-- Modal body -->
-                                                    <form method = "post"  enctype="multipart/form-data" >
+                                                    <form method = "post">
                                                     <div class="modal-body">
-                                                    No Polisi: 
-                                                    <input type = "text" name = "no_polisi" value="<?=$nopolisi;?>" placeholder = "No Polisi" class = "form-control" required>
-                                                    Foto Mobil : 
-                                                    <input type = "file" name = "foto_mobil" value="<?=$foto_mobil;?>" placeholder = "Foto Mobil" class = "form-control" required>
-                                                    Foto Nomor Rangka : 
-                                                    <input type = "file" name = "foto_norangka" value="<?=$foto_norangka;?>" placeholder = "Foto Nomor Rangka" class = "form-control" required>
-                                                    Foto Nomor Mesin :
-                                                    <input type = "file" name = "foto_nomesin" value="<?=$foto_nomesin;?>" placeholder = "Foto Nomor Mesin" class = "form-control" required>
-                                                    Scan STNK :
-                                                    <input type = "file" name = "foto_stnk" value="<?=$foto_stnk;?>" placeholder = "Scan STNK" class = "form-control" required>
-                                                    Scan BPKB :
-                                                    <input type = "file" name = "foto_bpkb" value="<?=$foto_bpkb;?>" placeholder = "Scan BPKB" class = "form-control" required>
+                                                    Nama Barang : 
+                                                    <input type = "text" name = "nama" value="<?=$nama;?>" placeholder = "Nama Barang" class = "form-control" required>
+                                                    Jenis Barang : 
+                                                    <input type = "text" name = "jenis" value="<?=$jenis;?>" placeholder = "Jenis Barang" class = "form-control" required>
+                                                    Merk Barang : 
+                                                    <input type = "text" name = "merk" value="<?=$merk;?>" placeholder = "Merk Barang" class = "form-control" required>
+                                                    Ukuran Barang : 
+                                                    <input type = "text" name = "ukuran" value="<?=$ukuran;?>" placeholder = "Ukuran Barang" class = "form-control">
+                                                    Stock Barang : 
+                                                    <input type = "text" name = "stock" value="<?=$stock;?>" placeholder = "Stock Barang" class = "form-control" required>
+                                                    Harga Satuan : 
+                                                    <input type = "text" name = "satuan" value="<?=$satuan;?>" placeholder = "Harga Satuan" class = "form-control" required>
+                                                    Lokasi : 
+                                                    <input type = "text" name = "lokasi" value="<?=$lokasi;?>" placeholder = "Lokasi" class = "form-control" required>
+                                                    <br>
                                                     </div>
                                                     
                                                     <!-- Modal footer -->
                                                     <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <input type="hidden" name = "idp" value="<?=$idp;?>">      
-                                                    <button type="submit" class="btn btn-primary" name = "updatedetail">Save changes</button>
+                                                    <input type="hidden" name = "ids" value="<?=$ids;?>">      
+                                                    <button type="submit" class="btn btn-primary" name = "updatestock">Save changes</button>
                                                 </div>
                                                     </form>
                                                     
                                                 </div>
                                                 </div>
-                                            </div>  
+                                            </div>
                                                 <!-- The Modal Delete -->
-                                                <div class="modal fade" id="delete<?=$idp;?>">
+                                                <div class="modal fade" id="delete<?=$ids;?>">
                                                     <div class="modal-dialog">
                                                     <div class="modal-content">
                                                 
@@ -238,8 +235,8 @@ $imgUrl = "logo_tjm.png";
                                                     <!-- Modal footer -->
                                                     <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <input type="hidden" name = "idp" value="<?=$idp;?>">      
-                                                    <button type="submit" class="btn btn-Danger" name = "deletephoto">Hapus</button>
+                                                    <input type="hidden" name = "ids" value="<?=$ids;?>">      
+                                                    <button type="submit" class="btn btn-Danger" name = "deletestock">Hapus</button>
                                                 </div>
                                                     </form>
                                                     
@@ -280,33 +277,35 @@ $imgUrl = "logo_tjm.png";
       
         <!-- Modal Header -->
         <div class="modal-header">
-          <h4 class="modal-title">Tambah Data</h4>
+          <h4 class="modal-title">Tambah Mobil</h4>
           <button type="button" class="btn-close" aria-label="Close" data-dismiss="modal">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         
         <!-- Modal body -->
-        <form method = "post" enctype="multipart/form-data">
+        <form method = "post">
         <div class="modal-body">
-            No Polisi: 
-          <input type = "text" name = "no_polisi" placeholder = "No Polisi" class = "form-control" required>
-          Foto Mobil : 
-          <input type = "file" name = "foto_mobil" placeholder = "Foto Mobil" class = "form-control" required>
-          Foto Nomor Rangka : 
-          <input type = "file" name = "foto_norangka" placeholder = "Foto Nomor Rangka" class = "form-control" required>
-          Foto Nomor Mesin :
-          <input type = "file" name = "foto_nomesin" placeholder = "Foto Nomor Mesin" class = "form-control" required>
-          Scan STNK :
-          <input type = "file" name = "foto_stnk" placeholder = "Scan STNK" class = "form-control" required>
-          Scan BPKB :
-          <input type = "file" name = "foto_bpkb" placeholder = "Scan BPKB" class = "form-control" required>
+        Nama Barang : 
+          <input type = "text" name = "nama" placeholder = "Nama Barang" class = "form-control" required>
+          Jenis Barang :
+          <input type = "text" name = "jenis" placeholder = "Jenis Barang" class = "form-control" required>
+          Merk : 
+          <input type = "text" name = "merk" placeholder = "Merk" class = "form-control" required>
+          Ukuran Barang : 
+          <input type = "text" name = "ukuran" placeholder = "Ukuran Barang" class = "form-control">
+          Stock Barang :
+          <input type = "text" name = "stock" placeholder = "Stock Barang" class = "form-control" required>
+          Satuan Barang : 
+          <input type = "text" name = "satuan" placeholder = "Satuan Barang" class = "form-control" required>
+          Lokasi : 
+          <input type = "text" name = "lokasi" placeholder = "Lokasi" class = "form-control" required>
         </div>
         
         <!-- Modal footer -->
         <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" name = "addpicture">Save changes</button>
+        <button type="submit" class="btn btn-primary" name = "addnewstock">Save changes</button>
       </div>
         </form>
         
