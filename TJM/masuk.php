@@ -1,7 +1,7 @@
 <?php
 require 'function.php';
 require 'cek.php';
-$imgUrl = "logo_tjm.PNG"; 
+$imgUrl = "logo_tjm.png"; 
 ?> 
 ?>
 
@@ -89,11 +89,11 @@ $imgUrl = "logo_tjm.PNG";
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Info Stock
                             </a>
-                            <a class="nav-link" href="detail.php">
+                            <a class="nav-link" href="masuk.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Barang Masuk
                             </a>
-                            <a class="nav-link" href="customer.php">
+                            <a class="nav-link" href="keluar.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Barang Keluar
                             </a>
@@ -111,7 +111,7 @@ $imgUrl = "logo_tjm.PNG";
                         <h1 class="mt-4">PT. Taruna Jaya Motor</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item"><a href="index.php">Main Page</a></li>
-                            <li class="breadcrumb-item active">Karyawan</li>
+                            <li class="breadcrumb-item active">Barang Masuk</li>
                         </ol>
                         <div class="card mb-4">
                             <div class="card-header">
@@ -124,50 +124,42 @@ $imgUrl = "logo_tjm.PNG";
                             <div class="card-body">
                                 <table id="datatablesSimple">
                                     <thead>
-                                        <tr>    
-                                            <th>Nama</th>
-                                            <th>E-Mail</th>
-                                            <th>No Telepon 1</th>
-                                            <th>No Telepon 2</th>
-                                            <th>No Telepon 3</th>
-                                            <th>Keterangan</th>
-                                            <th>Edit</th>
+                                        <tr>
+											<th>Tanggal</th>
+											<th>Nama Barang</th>
+											<th>Jenis</th>
+											<th>Merk</th>
+											<th>Ukuran</th>
+											<th>Jumlah</th>
+											<th>Keterangan</th>
+											<th>Edit</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     <?php
                                     // buat tampilin data ke tabel //
-                                        $ambildatakaryawan = mysqli_query($conn,"select * from karyawan");
-                                        while($datakaryawan=mysqli_fetch_array($ambildatakaryawan)){
-                                            $nama = $datakaryawan['nama'];
-                                            $email = $datakaryawan['email'];
-                                            $notlp1 = $datakaryawan['notelp1'];
-                                            $notlp2 = $datakaryawan['notelp2'];
-                                            $notlp3 = $datakaryawan['notelp3'];
-                                            $deskripsi = $datakaryawan['deskripsi'];
-                                            $idkar = $datakaryawan['idkaryawan'];
-                                        
-                                    ?>
+                                    $brg=mysqli_query($conn,"SELECT * from barang_masuk sb, stock st where st.idstock=sb.idstock order by sb.id DESC");
+                                    
+                                    while($b=mysqli_fetch_array($brg)){
+                                        $idb = $b['idstock'];
+                                        $id = $b['id'];
+                                        ?>
                                         <tr>
-                                            <td><?=$nama;?></td>
-                                            <td><?=$email;?></td>
-                                            <td><?=$notlp1;?></td>
-                                            <td><?=$notlp2;?></td>
-                                            <td><?=$notlp3;?></td>
-                                            <td><?=$deskripsi;?></td>
+                                            <td><?php $tanggals=$b['tgl']; echo date("d-M-Y", strtotime($tanggals)) ?></td>
+                                            <td><?php echo $b['nama'] ?></td>
+                                            <td><?php echo $b['jenis'] ?></td>
+                                            <td><?php echo $b['merk'] ?></td>
+                                            <td><?php echo $b['ukuran'] ?></td>
+                                            <td><?php echo $b['jumlah'] ?></td>
+                                            <td><?php echo $b['keterangan'] ?></td>
                                             <td>
-                                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#edit<?=$idkar;?>">
-                                                    Edit
-                                                </button>
-                                                <input type="hidden" name = "idkaryawanhapus" value="<?=$idkar;?>">
-                                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete<?=$idkar;?>">
-                                                    Delete 
-                                                </button>
+                                            <button data-toggle="modal" data-target="#edit<?=$id;?>" class="btn btn-warning">Edit</button> 
+                                            <button data-toggle="modal" data-target="#del<?=$id;?>" class="btn btn-danger">Delete</button>
                                             </td>
                                         </tr>
                                                                                             
                                                 <!-- The Modal Edit -->
-                                                <div class="modal fade" id="edit<?=$idkar;?>">
+                                                <div class="modal fade" id="edit<?=$id;?>">
                                                     <div class="modal-dialog">
                                                     <div class="modal-content">
                                                 
@@ -182,27 +174,27 @@ $imgUrl = "logo_tjm.PNG";
                                                     <!-- Modal body -->
                                                     <form method = "post">
                                                     <div class="modal-body">
-                                                    Nama : 
-                                                    <input type = "text" name = "nama" value="<?=$nama;?>" placeholder = "Nama" class = "form-control" required>
-                                                    <br>
-                                                    E-Mail :
-                                                    <input type = "email" name = "email" value="<?=$email;?>" placeholder = "email" class = "form-control" required>
-                                                    <br>
-                                                    Nomor Telepon :
-                                                    <input type = "text" name = "notelp1" value="<?=$notlp1;?>" placeholder = "No Telepon 1" class = "form-control" required>
-                                                    <input type = "text" name = "notelp2" value="<?=$notlp2;?>" placeholder = "No Telepon 2" class = "form-control">
-                                                    <input type = "text" name = "notelp3" value="<?=$notlp3;?>" placeholder = "No Telepon 3" class = "form-control">
-                                                    <br>
+                                                   
+                                                    Tanggal :
+                                                    <input type="date" id="tanggal" name="tanggal" class="form-control" value="<?php echo $b['tgl'] ?>">
+                                                    Nama Barang :
+                                                    <input type="text" id="nama" name="nama" class="form-control" value="<?php echo $b['nama'] ?> <?php echo $b['merk'] ?> <?php echo $b['jenis'] ?>" disabled>
+                                                    Ukuran Barang :
+                                                    <input type="text" id="ukuran" name="ukuran" class="form-control" value="<?php echo $b['ukuran'] ?>" disabled>
+                                                    Jumlah Barang :
+                                                    <input type="text" id="jumlah" name="jumlah" class="form-control" value="<?php echo $b['jumlah'] ?>">
                                                     Keterangan :
-                                                    <input type = "text" name = "deskripsi" value="<?=$deskripsi;?>" placeholder = "Keterangan" class = "form-control">
-                                                    <br>
+                                                    <input type="text" id="keterangan" name="keterangan" class="form-control" value="<?php echo $b['keterangan'] ?>">
+                                                    <input type="hidden" name="id" value="<?=$id;?>">
+                                                    <input type="hidden" name="idstock" value="<?=$idb;?>">
+
                                                     </div>
                                                     
                                                     <!-- Modal footer -->
                                                     <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <input type="hidden" name = "idkar" value="<?=$idkar;?>">      
-                                                    <button type="submit" class="btn btn-primary" name = "updatekaryawan">Save changes</button>
+                                                    <input type="hidden" name = "ids" value="<?=$ids;?>">      
+                                                    <button type="submit" class="btn btn-primary" name = "updatebarangmasuk">Save changes</button>
                                                 </div>
                                                     </form>
                                                     
@@ -210,7 +202,7 @@ $imgUrl = "logo_tjm.PNG";
                                                 </div>
                                             </div>
                                                 <!-- The Modal Delete -->
-                                                <div class="modal fade" id="delete<?=$idkar;?>">
+                                                <div class="modal fade" id="del<?=$id;?>">
                                                     <div class="modal-dialog">
                                                     <div class="modal-content">
                                                 
@@ -227,13 +219,15 @@ $imgUrl = "logo_tjm.PNG";
                                                     <div class="modal-body">
                                                     Apakah anda yakin untuk menghapus data ini?
                                                     <br>
+                                                    *Stock barang akan berkurang
+                                                    <input type="hidden" name="id" value="<?=$id;?>">
+                                                    <input type="hidden" name="idstock" value="<?=$idb;?>">
                                                     </div>
                                                     
                                                     <!-- Modal footer -->
                                                     <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <input type="hidden" name = "idkar" value="<?=$idkar;?>">      
-                                                    <button type="submit" class="btn btn-Danger" name = "deletekaryawan">Hapus</button>
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>   
+                                                    <button type="submit" class="btn btn-Danger" name = "deletebarangmasuk">Hapus</button>
                                                 </div>
                                                     </form>
                                                     
@@ -247,6 +241,7 @@ $imgUrl = "logo_tjm.PNG";
                                     </tbody>
                                 </table>
                             </div>
+							    <a href="stock/exportbrgmsk.php" target="_blank" class="btn btn-info">Export Data</a>
                         </div>
                     </div>
                 </main>
@@ -274,36 +269,37 @@ $imgUrl = "logo_tjm.PNG";
       
         <!-- Modal Header -->
         <div class="modal-header">
-          <h4 class="modal-title">Tambah Data</h4>
+          <h4 class="modal-title">Tambah Mobil</h4>
           <button type="button" class="btn-close" aria-label="Close" data-dismiss="modal">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         
         <!-- Modal body -->
-        <form method = "post">
+        <form action="stock/barang_masuk_act.php" method="post">
         <div class="modal-body">
-         
-          Nama :
-          <input type = "text" name = "nama" placeholder = "Nama" class = "form-control" required>
-          <br>
-          E-Mail : 
-          <input type = "email" name = "email" placeholder = "E-Mail" class = "form-control" required>
-          <br>
-          Nomor Telepon :
-          <input type = "text" name = "notelp1" placeholder = "No Telepon 1" class = "form-control" required>
-          <input type = "text" name = "notelp2" placeholder = "No Telepon 2" class = "form-control" >
-          <input type = "text" name = "notelp3" placeholder = "No Telepon 3" class = "form-control" >
-          <br>
-          Keterangan : 
-          <input type = "text" name = "deskripsi" placeholder = "Keterangan" class = "form-control">
-          <br>
-        </div>
-        
+        Tanggal :
+		<input name="tanggal" type="date" class="form-control"required>
+        Nama Barang :
+		<select name="barang" class="custom-select form-control">
+		<option selected>Pilih barang</option>
+		    <?php
+		    $det=mysqli_query($conn,"select * from stock order by nama ASC");
+		    while($d=mysqli_fetch_array($det)){
+		        ?>
+		            <option value="<?php echo $d['idstock'] ?>"><?php echo $d['nama'] ?> <?php echo $d['jenis'] ?> <?php echo $d['merk'] ?>, Ukuran. <?php echo $d['ukuran'] ?></option>
+		        <?php
+		    }
+		?> 
+        </select>
+        Jumlah Barang :
+        <input name="qty" type="number" min="1" class="form-control" placeholder="Qty"required>
+         Keterangan :
+        <input name="ket" type="text" class="form-control" placeholder="Keterangan"required>
         <!-- Modal footer -->
         <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" name = "addnewkaryawan">Save changes</button>
+		<input type="submit" class="btn btn-primary" value="Save Change">
       </div>
         </form>
         

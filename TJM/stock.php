@@ -89,11 +89,11 @@ $imgUrl = "logo_tjm.PNG";
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Info Stock
                             </a>
-                            <a class="nav-link" href="detail.php">
+                            <a class="nav-link" href="masuk.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Barang Masuk
                             </a>
-                            <a class="nav-link" href="customer.php">
+                            <a class="nav-link" href="keluar.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Barang Keluar
                             </a>
@@ -110,7 +110,8 @@ $imgUrl = "logo_tjm.PNG";
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">PT. Taruna Jaya Motor</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">Main Page</li>
+                            <li class="breadcrumb-item"><a href="index.php">Main Page</a></li>
+                            <li class="breadcrumb-item active">Stock</li>
                         </ol>
                         <div class="card mb-4">
                             <div class="card-header">
@@ -194,8 +195,6 @@ $imgUrl = "logo_tjm.PNG";
                                                     <input type = "text" name = "ukuran" value="<?=$ukuran;?>" placeholder = "Ukuran Barang" class = "form-control">
                                                     Stock Barang : 
                                                     <input type = "text" name = "stock" value="<?=$stock;?>" placeholder = "Stock Barang" class = "form-control" required>
-                                                    Harga Satuan : 
-                                                    <input type = "text" name = "satuan" value="<?=$satuan;?>" placeholder = "Harga Satuan" class = "form-control" required>
                                                     Lokasi : 
                                                     <input type = "text" name = "lokasi" value="<?=$lokasi;?>" placeholder = "Lokasi" class = "form-control" required>
                                                     <br>
@@ -250,6 +249,7 @@ $imgUrl = "logo_tjm.PNG";
                                     </tbody>
                                 </table>
                             </div>
+							<a href="stock/exportstkbhn.php" target="_blank" class="btn btn-info">Export Data</a>
                         </div>
                     </div>
                 </main>
@@ -277,7 +277,7 @@ $imgUrl = "logo_tjm.PNG";
       
         <!-- Modal Header -->
         <div class="modal-header">
-          <h4 class="modal-title">Tambah Mobil</h4>
+          <h4 class="modal-title">Tambah Data</h4>
           <button type="button" class="btn-close" aria-label="Close" data-dismiss="modal">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -297,7 +297,14 @@ $imgUrl = "logo_tjm.PNG";
           Stock Barang :
           <input type = "text" name = "stock" placeholder = "Stock Barang" class = "form-control" required>
           Satuan Barang : 
-          <input type = "text" name = "satuan" placeholder = "Satuan Barang" class = "form-control" required>
+          <select name="satuan" class="custom-select form-control">
+		    <option selected>Pilih satuan</option>
+			<option value="Buah">Buah</option>
+			<option value="Unit">Unit</option>
+			<option value="Meter">Meter</option>
+			<option value="Milimeter">Centimeter</option>
+			<option value="Milimeter">Milimeter</option>
+			</select>
           Lokasi : 
           <input type = "text" name = "lokasi" placeholder = "Lokasi" class = "form-control" required>
         </div>
