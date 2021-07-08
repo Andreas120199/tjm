@@ -89,11 +89,11 @@ $imgUrl = "logo_tjm.PNG";
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Info Stock
                             </a>
-                            <a class="nav-link" href="detail.php">
+                            <a class="nav-link" href="masuk.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Barang Masuk
                             </a>
-                            <a class="nav-link" href="customer.php">
+                            <a class="nav-link" href="keluar.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Barang Keluar
                             </a>
@@ -277,6 +277,7 @@ $imgUrl = "logo_tjm.PNG";
 
                                     </tbody>
                                 </table>
+							<a href="extract/exportmobil.php" target="_blank" class="btn btn-info">Export Data</a>
                             </div>
                         </div>
                     </div>

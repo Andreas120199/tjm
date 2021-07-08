@@ -246,6 +246,7 @@ $imgUrl = "logo_tjm.PNG";
 
                                     </tbody>
                                 </table>
+							<a href="extract/exportcustomer.php" target="_blank" class="btn btn-info">Export Data</a>
                             </div>
                         </div>
                     </div>

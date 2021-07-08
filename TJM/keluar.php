@@ -240,8 +240,8 @@ $imgUrl = "logo_tjm.png";
 
                                     </tbody>
                                 </table>
-                            </div>
 							    <a href="stock/exportbrgklr.php" target="_blank" class="btn btn-info">Export Data</a>
+                            </div>
                         </div>
                     </div>
                 </main>

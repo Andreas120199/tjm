@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 08, 2021 at 01:39 PM
+-- Generation Time: Jul 08, 2021 at 02:10 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.2.34
 
@@ -211,74 +211,6 @@ CREATE TABLE `managemet` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sbrg_keluar`
---
-
-CREATE TABLE `sbrg_keluar` (
-  `id` int(11) NOT NULL,
-  `idx` int(11) NOT NULL,
-  `tgl` date NOT NULL,
-  `jumlah` int(11) NOT NULL,
-  `penerima` varchar(35) NOT NULL,
-  `keterangan` text NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `sbrg_keluar`
---
-
-INSERT INTO `sbrg_keluar` (`id`, `idx`, `tgl`, `jumlah`, `penerima`, `keterangan`) VALUES
-(15, 244, '2020-08-29', 1000, 'Kasmina', 'Laku');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `sbrg_masuk`
---
-
-CREATE TABLE `sbrg_masuk` (
-  `id` int(11) NOT NULL,
-  `idx` int(11) NOT NULL,
-  `tgl` date NOT NULL,
-  `jumlah` int(11) NOT NULL,
-  `keterangan` text NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `sbrg_masuk`
---
-
-INSERT INTO `sbrg_masuk` (`id`, `idx`, `tgl`, `jumlah`, `keterangan`) VALUES
-(9, 244, '2020-08-07', 600, 'kk');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `sstock_brg`
---
-
-CREATE TABLE `sstock_brg` (
-  `idx` int(11) NOT NULL,
-  `nama` varchar(55) NOT NULL,
-  `jenis` varchar(30) NOT NULL,
-  `merk` varchar(40) NOT NULL,
-  `ukuran` varchar(20) NOT NULL,
-  `stock` int(12) NOT NULL,
-  `satuan` varchar(10) NOT NULL,
-  `lokasi` varchar(55) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `sstock_brg`
---
-
-INSERT INTO `sstock_brg` (`idx`, `nama`, `jenis`, `merk`, `ukuran`, `stock`, `satuan`, `lokasi`) VALUES
-(243, 'Mata Bor', 'Flame', 'Garryson', '50', 2992, 'Buah', 'PT Willtec'),
-(244, 'Mata Bor', 'Ball Nosed Cone', 'Garryson', '17', 1000, 'Unit', 'PT Wiltec');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `stock`
 --
 
@@ -356,24 +288,6 @@ ALTER TABLE `managemet`
   ADD PRIMARY KEY (`idmanage`);
 
 --
--- Indexes for table `sbrg_keluar`
---
-ALTER TABLE `sbrg_keluar`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `sbrg_masuk`
---
-ALTER TABLE `sbrg_masuk`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `sstock_brg`
---
-ALTER TABLE `sstock_brg`
-  ADD PRIMARY KEY (`idx`);
-
---
 -- Indexes for table `stock`
 --
 ALTER TABLE `stock`
@@ -430,24 +344,6 @@ ALTER TABLE `login`
 --
 ALTER TABLE `managemet`
   MODIFY `idmanage` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `sbrg_keluar`
---
-ALTER TABLE `sbrg_keluar`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
-
---
--- AUTO_INCREMENT for table `sbrg_masuk`
---
-ALTER TABLE `sbrg_masuk`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
---
--- AUTO_INCREMENT for table `sstock_brg`
---
-ALTER TABLE `sstock_brg`
-  MODIFY `idx` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=245;
 
 --
 -- AUTO_INCREMENT for table `stock`

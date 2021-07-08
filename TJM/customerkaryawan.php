@@ -68,32 +68,32 @@ $imgUrl = "logo_tjm.PNG";
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Core</div>
-                            <a class="nav-link" href="index.php">
+                            <a class="nav-link" href="indexkaryawan.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Main Page
                             </a>
-                            <a class="nav-link" href="detail.php">
+                            <a class="nav-link" href="detailkaryawan.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Detail
                             </a>
-                            <a class="nav-link" href="customer.php">
+                            <a class="nav-link" href="customerkaryawan.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Customer
                             </a>
-                            <a class="nav-link" href="infokaryawan.php">
+                            <a class="nav-link" href="infokaryawan2.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Karyawan
                             </a>
                             <div class="sb-sidenav-menu-heading">Stock</div>
-                            <a class="nav-link" href="stock.php">
+                            <a class="nav-link" href="stockkaryawan.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Info Stock
                             </a>
-                            <a class="nav-link" href="detail.php">
+                            <a class="nav-link" href="masukkaryawan.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Barang Masuk
                             </a>
-                            <a class="nav-link" href="customer.php">
+                            <a class="nav-link" href="keluarkaryawan.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Barang Keluar
                             </a>
@@ -201,6 +201,7 @@ $imgUrl = "logo_tjm.PNG";
 
                                     </tbody>
                                 </table>
+							<a href="extract/exportcustomer.php" target="_blank" class="btn btn-info">Export Data</a>
                             </div>
                         </div>
                     </div>

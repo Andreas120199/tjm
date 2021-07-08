@@ -240,8 +240,8 @@ $imgUrl = "logo_tjm.png";
 
                                     </tbody>
                                 </table>
-                            </div>
 							    <a href="stock/exportbrgmsk.php" target="_blank" class="btn btn-info">Export Data</a>
+                            </div>
                         </div>
                     </div>
                 </main>
@@ -269,7 +269,7 @@ $imgUrl = "logo_tjm.png";
       
         <!-- Modal Header -->
         <div class="modal-header">
-          <h4 class="modal-title">Tambah Mobil</h4>
+          <h4 class="modal-title">Input Data Barang Masuk</h4>
           <button type="button" class="btn-close" aria-label="Close" data-dismiss="modal">
             <span aria-hidden="true">&times;</span>
           </button>
