@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 17, 2021 at 07:36 PM
+-- Generation Time: Jul 08, 2021 at 01:39 PM
 -- Server version: 10.4.17-MariaDB
--- PHP Version: 8.0.0
+-- PHP Version: 7.2.34
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,17 +24,62 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `barang_keluar`
+--
+
+CREATE TABLE `barang_keluar` (
+  `id` int(11) NOT NULL,
+  `idstock` int(11) NOT NULL,
+  `tgl` date NOT NULL,
+  `jumlah` int(11) NOT NULL,
+  `penerima` varchar(35) NOT NULL,
+  `keterangan` text NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `barang_keluar`
+--
+
+INSERT INTO `barang_keluar` (`id`, `idstock`, `tgl`, `jumlah`, `penerima`, `keterangan`) VALUES
+(16, 248, '2021-07-31', 4, 'Suki', 'test');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `barang_masuk`
+--
+
+CREATE TABLE `barang_masuk` (
+  `id` int(11) NOT NULL,
+  `idstock` int(11) NOT NULL,
+  `tgl` date NOT NULL,
+  `jumlah` int(11) NOT NULL,
+  `keterangan` text NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `barang_masuk`
+--
+
+INSERT INTO `barang_masuk` (`id`, `idstock`, `tgl`, `jumlah`, `keterangan`) VALUES
+(16, 248, '2021-07-29', 2, 'test'),
+(15, 248, '2021-06-27', 5, 'test'),
+(17, 248, '2021-07-30', 1, 'test');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `customer`
 --
 
 CREATE TABLE `customer` (
   `idcustomer` int(11) NOT NULL,
   `nama` varchar(50) NOT NULL,
-  `notlp1` int(25) NOT NULL,
-  `notlp2` int(25) DEFAULT NULL,
-  `notlp3` int(25) DEFAULT NULL,
+  `notlp1` varchar(25) NOT NULL,
+  `notlp2` varchar(25) DEFAULT NULL,
+  `notlp3` varchar(25) DEFAULT NULL,
   `alamat` varchar(50) NOT NULL,
-  `deskripsi` varchar(255) NOT NULL
+  `deskripsi` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -42,7 +87,7 @@ CREATE TABLE `customer` (
 --
 
 INSERT INTO `customer` (`idcustomer`, `nama`, `notlp1`, `notlp2`, `notlp3`, `alamat`, `deskripsi`) VALUES
-(1, 'Juki', 2147483647, NULL, NULL, 'Jl.taruna', 'Hanya Buat Test saja');
+(1, 'Juki', '+6281-803-231-4', '', '', 'Jl.taruna', 'Hanya Buat Test saja');
 
 -- --------------------------------------------------------
 
@@ -59,6 +104,13 @@ CREATE TABLE `detail` (
   `foto_stnk` varchar(100) DEFAULT NULL,
   `foto_bpkb` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `detail`
+--
+
+INSERT INTO `detail` (`iddetail`, `no_polisi`, `foto_mobil`, `foto_norangka`, `foto_nomesin`, `foto_stnk`, `foto_bpkb`) VALUES
+(4, 'testpic1', 'image/16254897611_icon.png', 'image/16254897611_rwqvqjicgwj11.jpg', 'image/16254897611_received_774272869981530.png', 'image/16254897611_4a85dbb7eed7dc5ed691825422eb2ba0.jpg', 'image/16254897611_ch-die-house-lg.jpg');
 
 -- --------------------------------------------------------
 
@@ -91,6 +143,29 @@ INSERT INTO `info` (`idmobil`, `no_polisi`, `merk`, `type`, `tahun`, `no_rangka`
 (1, 'B4568IO', 'TOYOTA', 'PICKUP', 2000, 'MHYKZE81SCJ115045', '45E-0231530', 'UHJ/1548/BUX4/2004', 'HERMAN', 'TERJUAL', '15/8/2010', 'HERMAN', '4/8/2018', 'BUDI'),
 (4, '121 pot', 'TOYOTA', 'dump truck', 2012, 'mhywal4398874', 'dhsfiy', 'kdfi232', 'kfjsidt', 'kju', '20012021', 'al', '', ''),
 (5, 'B4568IB', 'MITSUBISI', 'BOX', 2014, 'MHYKZE81SCJ115123', '45E-023456', 'UHJ/1548/BUX4/2010', 'HENDRA', 'TEREDIA', '', 'HENDR', '4/8/2017', 'JUDE');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `karyawan`
+--
+
+CREATE TABLE `karyawan` (
+  `idkaryawan` int(11) NOT NULL,
+  `nama` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `notelp1` varchar(15) NOT NULL,
+  `notelp2` varchar(15) DEFAULT NULL,
+  `notelp3` varchar(15) DEFAULT NULL,
+  `deskripsi` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `karyawan`
+--
+
+INSERT INTO `karyawan` (`idkaryawan`, `nama`, `email`, `notelp1`, `notelp2`, `notelp3`, `deskripsi`) VALUES
+(1, 'Budi', 'apalahitu@gmail.com', '+123456789', '', '', 'Hanya Buat Test saja');
 
 -- --------------------------------------------------------
 
@@ -133,9 +208,113 @@ CREATE TABLE `managemet` (
   `nomminal` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sbrg_keluar`
+--
+
+CREATE TABLE `sbrg_keluar` (
+  `id` int(11) NOT NULL,
+  `idx` int(11) NOT NULL,
+  `tgl` date NOT NULL,
+  `jumlah` int(11) NOT NULL,
+  `penerima` varchar(35) NOT NULL,
+  `keterangan` text NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `sbrg_keluar`
+--
+
+INSERT INTO `sbrg_keluar` (`id`, `idx`, `tgl`, `jumlah`, `penerima`, `keterangan`) VALUES
+(15, 244, '2020-08-29', 1000, 'Kasmina', 'Laku');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sbrg_masuk`
+--
+
+CREATE TABLE `sbrg_masuk` (
+  `id` int(11) NOT NULL,
+  `idx` int(11) NOT NULL,
+  `tgl` date NOT NULL,
+  `jumlah` int(11) NOT NULL,
+  `keterangan` text NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `sbrg_masuk`
+--
+
+INSERT INTO `sbrg_masuk` (`id`, `idx`, `tgl`, `jumlah`, `keterangan`) VALUES
+(9, 244, '2020-08-07', 600, 'kk');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sstock_brg`
+--
+
+CREATE TABLE `sstock_brg` (
+  `idx` int(11) NOT NULL,
+  `nama` varchar(55) NOT NULL,
+  `jenis` varchar(30) NOT NULL,
+  `merk` varchar(40) NOT NULL,
+  `ukuran` varchar(20) NOT NULL,
+  `stock` int(12) NOT NULL,
+  `satuan` varchar(10) NOT NULL,
+  `lokasi` varchar(55) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `sstock_brg`
+--
+
+INSERT INTO `sstock_brg` (`idx`, `nama`, `jenis`, `merk`, `ukuran`, `stock`, `satuan`, `lokasi`) VALUES
+(243, 'Mata Bor', 'Flame', 'Garryson', '50', 2992, 'Buah', 'PT Willtec'),
+(244, 'Mata Bor', 'Ball Nosed Cone', 'Garryson', '17', 1000, 'Unit', 'PT Wiltec');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `stock`
+--
+
+CREATE TABLE `stock` (
+  `idstock` int(11) NOT NULL,
+  `nama` varchar(55) NOT NULL,
+  `jenis` varchar(30) NOT NULL,
+  `merk` varchar(40) NOT NULL,
+  `ukuran` varchar(20) NOT NULL,
+  `stock` int(12) NOT NULL,
+  `satuan` varchar(50) NOT NULL,
+  `lokasi` varchar(55) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `stock`
+--
+
+INSERT INTO `stock` (`idstock`, `nama`, `jenis`, `merk`, `ukuran`, `stock`, `satuan`, `lokasi`) VALUES
+(248, 'test1', 'test', 'test', '4cm', 5, 'Buah', 'rumah');
+
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `barang_keluar`
+--
+ALTER TABLE `barang_keluar`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `barang_masuk`
+--
+ALTER TABLE `barang_masuk`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `customer`
@@ -159,6 +338,12 @@ ALTER TABLE `info`
   ADD KEY `seller` (`seller`);
 
 --
+-- Indexes for table `karyawan`
+--
+ALTER TABLE `karyawan`
+  ADD PRIMARY KEY (`idkaryawan`);
+
+--
 -- Indexes for table `login`
 --
 ALTER TABLE `login`
@@ -171,26 +356,68 @@ ALTER TABLE `managemet`
   ADD PRIMARY KEY (`idmanage`);
 
 --
+-- Indexes for table `sbrg_keluar`
+--
+ALTER TABLE `sbrg_keluar`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sbrg_masuk`
+--
+ALTER TABLE `sbrg_masuk`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sstock_brg`
+--
+ALTER TABLE `sstock_brg`
+  ADD PRIMARY KEY (`idx`);
+
+--
+-- Indexes for table `stock`
+--
+ALTER TABLE `stock`
+  ADD PRIMARY KEY (`idstock`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `barang_keluar`
+--
+ALTER TABLE `barang_keluar`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `barang_masuk`
+--
+ALTER TABLE `barang_masuk`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `idcustomer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idcustomer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `detail`
 --
 ALTER TABLE `detail`
-  MODIFY `iddetail` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `iddetail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `info`
 --
 ALTER TABLE `info`
   MODIFY `idmobil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `karyawan`
+--
+ALTER TABLE `karyawan`
+  MODIFY `idkaryawan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `login`
@@ -203,6 +430,30 @@ ALTER TABLE `login`
 --
 ALTER TABLE `managemet`
   MODIFY `idmanage` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `sbrg_keluar`
+--
+ALTER TABLE `sbrg_keluar`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `sbrg_masuk`
+--
+ALTER TABLE `sbrg_masuk`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `sstock_brg`
+--
+ALTER TABLE `sstock_brg`
+  MODIFY `idx` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=245;
+
+--
+-- AUTO_INCREMENT for table `stock`
+--
+ALTER TABLE `stock`
+  MODIFY `idstock` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=249;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
