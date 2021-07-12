@@ -1,7 +1,7 @@
 <?php
 require 'function.php';
 require 'cek.php';
-$imgUrl = "logo_tjm.png"; 
+$imgUrl = "logo_tjm.PNG"; 
 ?> 
 ?>
 
@@ -115,7 +115,7 @@ $imgUrl = "logo_tjm.png";
                         <h1 class="mt-4">PT. Taruna Jaya Motor</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item"><a href="index.php">Main Page</a></li>
-                            <li class="breadcrumb-item active">Barang Keluar</li>
+                            <li class="breadcrumb-item active">Penjual</li>
                         </ol>
                         <div class="card mb-4">
                             <div class="card-header">
@@ -129,39 +129,49 @@ $imgUrl = "logo_tjm.png";
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
-											<th>Tanggal</th>
-											<th>Barang</th>
-											<th>Ukuran</th>
-											<th>Jumlah</th>
-											<th>Penerima</th>
-											<th>Keterangan</th>
-											<th>Edit</th>
+                                            <th>Nama</th>
+                                            <th>No Telepon 1</th>
+                                            <th>No Telepon 2</th>
+                                            <th>No Telepon 3</th>
+                                            <th>Alamat</th>
+                                            <th>Keterangan</th>
+                                            <th>Edit</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php 
-                                        //Buat Tampil Data ke Tabel
-                                        $brg=mysqli_query($conn,"SELECT * FROM barang_keluar sb, stock st where st.idstock=sb.idstock ORDER BY id DESC");
+                                    <?php
+                                    // buat tampilin data ke tabel //
+                                        $ambildataseller = mysqli_query($conn,"select * from seller");
+                                        while($dataseller=mysqli_fetch_array($ambildataseller)){
+                                            $nama = $dataseller['nama'];
+                                            $notlp1 = $dataseller['notlp1'];
+                                            $notlp2 = $dataseller['notlp2'];
+                                            $notlp3 = $dataseller['notlp3'];
+                                            $alamat = $dataseller['alamat'];
+                                            $deskripsi = $dataseller['deskripsi'];
+                                            $idsl = $dataseller['idseller'];
                                         
-                                        while($b=mysqli_fetch_array($brg)){
-                                            $idb = $b['idstock'];
-                                            $id = $b['id'];
-                                        ?>
+                                    ?>
                                         <tr>
-                                            <td><?php $tanggals=$b['tgl']; echo date("d-M-Y", strtotime($tanggals)) ?></td>
-                                            <td><?php echo $b['nama'] ?> <?php echo $b['jenis'] ?> <?php echo $b['merk'] ?></td>
-                                            <td><?php echo $b['ukuran'] ?></td>
-                                            <td><?php echo $b['jumlah'] ?></td>
-                                            <td><?php echo $b['penerima'] ?></td>
-                                            <td><?php echo $b['keterangan'] ?></td>
+                                            <td><?=$nama;?></td>
+                                            <td><?=$notlp1;?></td>
+                                            <td><?=$notlp2;?></td>
+                                            <td><?=$notlp3;?></td>
+                                            <td><?=$alamat;?></td>
+                                            <td><?=$deskripsi;?></td>
                                             <td>
-                                            <button data-toggle="modal" data-target="#edit<?=$id;?>" class="btn btn-warning">Edit</button> 
-                                            <button data-toggle="modal" data-target="#del<?=$id;?>" class="btn btn-danger">Delete</button>
+                                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#edit<?=$idsl;?>">
+                                                    Edit
+                                                </button>
+                                                <input type="hidden" name = "idsellerhapus" value="<?=$idsl;?>">
+                                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete<?=$idsl;?>">
+                                                    Delete 
+                                                </button>
                                             </td>
                                         </tr>
                                                                                             
                                                 <!-- The Modal Edit -->
-                                                <div class="modal fade" id="edit<?=$id;?>">
+                                                <div class="modal fade" id="edit<?=$idsl;?>">
                                                     <div class="modal-dialog">
                                                     <div class="modal-content">
                                                 
@@ -176,29 +186,27 @@ $imgUrl = "logo_tjm.png";
                                                     <!-- Modal body -->
                                                     <form method = "post">
                                                     <div class="modal-body">
-                                                   
-                                                    Tanggal :
-                                                    <input type="date" id="tanggal" name="tanggal" class="form-control" value="<?php echo $b['tgl'] ?>">
-                                                    Nama Barang :
-                                                    <input type="text" id="nama" name="nama" class="form-control" value="<?php echo $b['nama'] ?> <?php echo $b['merk'] ?> <?php echo $b['jenis'] ?>" disabled>
-                                                    Ukuran Barang :
-                                                    <input type="text" id="ukuran" name="ukuran" class="form-control" value="<?php echo $b['ukuran'] ?>" disabled>
-                                                    Jumlah Barang :
-                                                    <input type="number" id="jumlah" name="jumlah" class="form-control" value="<?php echo $b['jumlah'] ?>">
-                                                    Penerima :
-                                                    <input type="text" id="penerima" name="penerima" class="form-control" value="<?php echo $b['penerima'] ?>">
+                                                    Nama : 
+                                                    <input type = "text" name = "nama" value="<?=$nama;?>" placeholder = "Nama" class = "form-control" required>
+                                                    <br>
+                                                    Nomor Telepon :
+                                                    <input type = "text" name = "notlp1" value="<?=$notlp1;?>" placeholder = "No Telepon 1" class = "form-control" required>
+                                                    <input type = "text" name = "notlp2" value="<?=$notlp2;?>" placeholder = "No Telepon 2" class = "form-control">
+                                                    <input type = "text" name = "notlp3" value="<?=$notlp3;?>" placeholder = "No Telepon 3" class = "form-control">
+                                                    <br>
+                                                    Alamat :
+                                                    <input type = "text" name = "alamat" value="<?=$alamat;?>" placeholder = "Alamat" class = "form-control" required>
+                                                    <br>
                                                     Keterangan :
-                                                    <input type="text" id="keterangan" name="keterangan" class="form-control" value="<?php echo $b['keterangan'] ?>">
-                                                    <input type="hidden" name="id" value="<?=$id;?>">
-                                                    <input type="hidden" name="idstock" value="<?=$idb;?>">
-
+                                                    <input type = "text" name = "deskripsi" value="<?=$deskripsi;?>" placeholder = "Keterangan" class = "form-control">
+                                                    <br>
                                                     </div>
                                                     
                                                     <!-- Modal footer -->
                                                     <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <input type="hidden" name = "ids" value="<?=$ids;?>">      
-                                                    <button type="submit" class="btn btn-primary" name = "updatebarangmasuk">Save changes</button>
+                                                    <input type="hidden" name = "idsl" value="<?=$idsl;?>">      
+                                                    <button type="submit" class="btn btn-primary" name = "updateseller">Save changes</button>
                                                 </div>
                                                     </form>
                                                     
@@ -206,7 +214,7 @@ $imgUrl = "logo_tjm.png";
                                                 </div>
                                             </div>
                                                 <!-- The Modal Delete -->
-                                                <div class="modal fade" id="del<?=$id;?>">
+                                                <div class="modal fade" id="delete<?=$idsl;?>">
                                                     <div class="modal-dialog">
                                                     <div class="modal-content">
                                                 
@@ -223,15 +231,13 @@ $imgUrl = "logo_tjm.png";
                                                     <div class="modal-body">
                                                     Apakah anda yakin untuk menghapus data ini?
                                                     <br>
-                                                    *Stock barang akan berkurang
-                                                    <input type="hidden" name="id" value="<?=$id;?>">
-                                                    <input type="hidden" name="idstock" value="<?=$idb;?>">
                                                     </div>
                                                     
                                                     <!-- Modal footer -->
                                                     <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>   
-                                                    <button type="submit" class="btn btn-Danger" name = "deletebarangmasuk">Hapus</button>
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <input type="hidden" name = "idsl" value="<?=$idsl;?>">      
+                                                    <button type="submit" class="btn btn-Danger" name = "deleteseller">Hapus</button>
                                                 </div>
                                                     </form>
                                                     
@@ -244,7 +250,7 @@ $imgUrl = "logo_tjm.png";
 
                                     </tbody>
                                 </table>
-							    <a href="stock/exportbrgklr.php" target="_blank" class="btn btn-info">Export Data</a>
+							<a href="extract/exportseller.php" target="_blank" class="btn btn-info">Export Data</a>
                             </div>
                         </div>
                     </div>
@@ -273,39 +279,36 @@ $imgUrl = "logo_tjm.png";
       
         <!-- Modal Header -->
         <div class="modal-header">
-          <h4 class="modal-title">Input Data Barang Keluar</h4>
+          <h4 class="modal-title">Tambah Data</h4>
           <button type="button" class="btn-close" aria-label="Close" data-dismiss="modal">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         
         <!-- Modal body -->
-        <form action="stock/barang_keluar_act.php" method="post">
+        <form method = "post">
         <div class="modal-body">
-        Tanggal :
-		<input name="tanggal" type="date" class="form-control"required>
-        Nama Barang :
-		<select name="barang" class="custom-select form-control">
-		<option selected>Pilih barang</option>
-		    <?php
-		    $det=mysqli_query($conn,"select * from stock order by nama ASC");
-		    while($d=mysqli_fetch_array($det)){
-		        ?>
-		            <option value="<?php echo $d['idstock'] ?>"><?php echo $d['nama'] ?> <?php echo $d['jenis'] ?> <?php echo $d['merk'] ?>, Ukuran. <?php echo $d['ukuran'] ?></option>
-		        <?php
-		    }
-		?> 
-        </select>
-        Jumlah Barang :
-        <input name="qty" type="number" min="1" class="form-control" placeholder="Qty"required>
-        Penerima :
-		<input name="penerima" type="text" class="form-control" placeholder="Penerima barang">
-		Keterangan :
-        <input name="ket" type="text" class="form-control" placeholder="Keterangan"required>
+         
+          Nama :
+          <input type = "text" name = "nama" placeholder = "Nama" class = "form-control" required>
+          <br>
+          Nomor Telepon :
+          <input type = "text" name = "notlp1" placeholder = "No Telepon 1" class = "form-control" required>
+          <input type = "text" name = "notlp2" placeholder = "No Telepon 2" class = "form-control" >
+          <input type = "text" name = "notlp3" placeholder = "No Telepon 3" class = "form-control" >
+          <br>
+          Alamat : 
+          <input type = "text" name = "alamat" placeholder = "Alamat" class = "form-control" required>
+          <br>
+          Keterangan : 
+          <input type = "text" name = "deskripsi" placeholder = "Keterangan" class = "form-control">
+          <br>
+        </div>
+        
         <!-- Modal footer -->
         <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-		<input type="submit" class="btn btn-primary" value="Save Change">
+        <button type="submit" class="btn btn-primary" name = "addnewseller">Save changes</button>
       </div>
         </form>
         

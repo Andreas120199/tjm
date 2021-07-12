@@ -201,6 +201,25 @@ if(isset($_POST['addnewcustomer'])){
     }
 }
 
+//menambah data seller
+if(isset($_POST['addnewseller'])){
+    $nama = $_POST['nama'];
+    $notlp1 = $_POST['notlp1'];
+    $notlp2 = $_POST['notlp2'];
+    $notlp3 = $_POST['notlp3'];
+    $alamat = $_POST['alamat'];
+    $deskripsi = $_POST['deskripsi'];
+    
+    $addtotable = mysqli_query($conn, "insert into stock (nama, notlp1, notlp2, notlp3, alamat, deskripsi)
+    values ('$nama', '$notlp1', '$notlp2', '$notlp3', '$alamat', '$deskripsi')");
+    if($addtotable){
+        header('location:seller.php');
+    }else{
+        echo'gagal';
+        header('location:seller.php');
+    }
+}
+
 //menambah data karyawan
 if(isset($_POST['addnewkaryawan'])){
     $nama = $_POST['nama'];
@@ -285,6 +304,26 @@ if(isset($_POST['updatecustomer'])){
     }else{
         echo'gagal';
         header('location:customer.php');
+    }
+}
+
+//Update Info seller
+
+if(isset($_POST['updateseller'])){
+    $idsl = $_POST['idsl'];
+    $nama = $_POST['nama'];
+    $notlp1 = $_POST['notlp1'];
+    $notlp2 = $_POST['notlp2'];
+    $notlp3 = $_POST['notlp3'];
+    $alamat = $_POST['alamat'];
+    $deskripsi = $_POST['deskripsi'];
+    $update = mysqli_query($conn, "update seller set nama='$nama', notlp1='$notlp1', notlp2='$notlp2', notlp3='$notlp3', alamat='$alamat',deskripsi='$deskripsi'
+     where idseller = '$idsl'");
+    if($update){
+        header('location:seller.php');
+    }else{
+        echo'gagal';
+        header('location:seller.php');
     }
 }
 
@@ -478,7 +517,22 @@ if(isset($_POST['deletecustomer'])){
     }
 }
 
-//Delete Data Customer
+
+//Delete Data seller
+
+if(isset($_POST['deleteseller'])){
+    $idsl = $_POST['idsl'];
+
+    $delete = mysqli_query($conn, "delete from seller where idseller = '$idsl'");
+    if($delete){
+        header('location:seller.php');
+    }else{
+        echo'gagal';
+        header('location:seller.php');
+    }
+}
+
+//Delete Data Karywan
 
 if(isset($_POST['deletekaryawan'])){
     $idkar = $_POST['idkar'];

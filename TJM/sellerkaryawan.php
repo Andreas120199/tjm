@@ -13,7 +13,7 @@ $imgUrl = "logo_tjm.PNG";
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Dashboard - Admin</title>
+        <title>Dashboard - Karyawan</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
@@ -80,10 +80,6 @@ $imgUrl = "logo_tjm.PNG";
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Customer
                             </a>
-                            <a class="nav-link" href="sellerkaryawan.php">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                Penjual
-                            </a>
                             <a class="nav-link" href="infokaryawan2.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Karyawan
@@ -114,59 +110,98 @@ $imgUrl = "logo_tjm.PNG";
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">PT. Taruna Jaya Motor</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item"><a href="index.php">Main Page</a></li>
-                            <li class="breadcrumb-item active">Stock</li>
+                            <li class="breadcrumb-item"><a href="indexkaryawan.php">Main Page</a></li>
+                            <li class="breadcrumb-item active">Customer</li>
                         </ol>
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-                                <!-- Button to Open the Modal -->
                             </div>
                             <div class="card-body">
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
                                             <th>Nama</th>
-                                            <th>Jenis</th>
-                                            <th>Merk</th>
-                                            <th>Ukuran</th>
-                                            <th>Stock</th>
-                                            <th>Satuan</th>
-                                            <th>Lokasi</th>
+                                            <th>No Telepon 1 +62</th>
+                                            <th>No Telepon 2 +62</th>
+                                            <th>No Telepon 3 +62</th>
+                                            <th>Alamat</th>
+                                            <th>Keterangan</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     <?php
                                     // buat tampilin data ke tabel //
-                                        $ambilsemuadata = mysqli_query($conn,"select * from stock");
-                                        while($data=mysqli_fetch_array($ambilsemuadata)){
-                                            $nama = $data['nama'];
-                                            $jenis = $data['jenis'];
-                                            $merk = $data['merk'];
-                                            $ukuran = $data['ukuran'];
-                                            $stock = $data['stock'];
-                                            $satuan = $data['satuan'];
-                                            $lokasi = $data['lokasi'];
-                                            $ids = $data['idstock'];
+                                        $ambildatacustomer = mysqli_query($conn,"select * from customer");
+                                        while($datacustomer=mysqli_fetch_array($ambildatacustomer)){
+                                            $nama = $datacustomer['nama'];
+                                            $notlp1 = $datacustomer['notlp1'];
+                                            $notlp2 = $datacustomer['notlp2'];
+                                            $notlp3 = $datacustomer['notlp3'];
+                                            $alamat = $datacustomer['alamat'];
+                                            $deskripsi = $datacustomer['deskripsi'];
+                                            $idc = $datacustomer['idcustomer'];
                                         
                                     ?>
                                         <tr>
                                             <td><?=$nama;?></td>
-                                            <td><?=$jenis;?></td>
-                                            <td><?=$merk;?></td>
-                                            <td><?=$ukuran;?></td>
-                                            <td><?=$stock;?></td>
-                                            <td><?=$satuan;?></td>
-                                            <td><?=$lokasi;?></td>
+                                            <td><?=$notlp1;?></td>
+                                            <td><?=$notlp2;?></td>
+                                            <td><?=$notlp3;?></td>
+                                            <td><?=$alamat;?></td>
+                                            <td><?=$deskripsi;?></td>
                                         </tr>
-                                               
+                                                                                            
+                                                <!-- The Modal Edit -->
+                                                <div class="modal fade" id="edit<?=$idc;?>">
+                                                    <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                
+                                                    <!-- Modal Header -->
+                                                    <div class="modal-header">
+                                                    <h4 class="modal-title">Edit</h4>
+                                                    <button type="button" class="btn-close" aria-label="Close" data-dismiss="modal">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                    </div>
+                                                    
+                                                    <!-- Modal body -->
+                                                    <form method = "post">
+                                                    <div class="modal-body">
+                                                    Nama : 
+                                                    <input type = "text" name = "nama" value="<?=$nama;?>" placeholder = "Nama" class = "form-control" required>
+                                                    <br>
+                                                    Nomor Telepon :
+                                                    <input type = "text" name = "notlp1" value="<?=$notlp1;?>" placeholder = "No Telepon 1" class = "form-control" required>
+                                                    <input type = "text" name = "notlp2" value="<?=$notlp2;?>" placeholder = "No Telepon 2" class = "form-control">
+                                                    <input type = "text" name = "notlp3" value="<?=$notlp3;?>" placeholder = "No Telepon 3" class = "form-control">
+                                                    <br>
+                                                    Alamat :
+                                                    <input type = "text" name = "alamat" value="<?=$alamat;?>" placeholder = "Alamat" class = "form-control" required>
+                                                    <br>
+                                                    Keterangan :
+                                                    <input type = "text" name = "deskripsi" value="<?=$deskripsi;?>" placeholder = "Keterangan" class = "form-control">
+                                                    <br>
+                                                    </div>
+                                                    
+                                                    <!-- Modal footer -->
+                                                    <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <input type="hidden" name = "idc" value="<?=$idc;?>">      
+                                                    <button type="submit" class="btn btn-primary" name = "updatecustomer">Save changes</button>
+                                                </div>
+                                                    </form>
+                                                    
+                                                </div>
+                                                </div>
+                                            </div>
                                         <?php
                                         };
                                     ?>
 
                                     </tbody>
                                 </table>
-							<a href="stock/exportstkbhn.php" target="_blank" class="btn btn-info">Export Data</a>
+							<a href="extract/exportcustomer.php" target="_blank" class="btn btn-info">Export Data</a>
                             </div>
                         </div>
                     </div>
@@ -188,4 +223,47 @@ $imgUrl = "logo_tjm.PNG";
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="js/datatables-simple-demo.js"></script>
     </body>
+      <!-- The Modal -->
+      <div class="modal fade" id="myModal">
+        <div class="modal-dialog">
+        <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Tambah Data</h4>
+          <button type="button" class="btn-close" aria-label="Close" data-dismiss="modal">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        
+        <!-- Modal body -->
+        <form method = "post">
+        <div class="modal-body">
+         
+          Nama :
+          <input type = "text" name = "nama" placeholder = "Nama" class = "form-control" required>
+          <br>
+          Nomor Telepon :
+          <input type = "text" name = "notlp1" placeholder = "No Telepon 1" class = "form-control" required>
+          <input type = "text" name = "notlp2" placeholder = "No Telepon 2" class = "form-control" >
+          <input type = "text" name = "notlp3" placeholder = "No Telepon 3" class = "form-control" >
+          <br>
+          Alamat : 
+          <input type = "text" name = "alamat" placeholder = "Alamat" class = "form-control" required>
+          <br>
+          Keterangan : 
+          <input type = "text" name = "deskripsi" placeholder = "Keterangan" class = "form-control">
+          <br>
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" name = "addnewcustomer">Save changes</button>
+      </div>
+        </form>
+        
+      </div>
+    </div>
+  </div>
 </html>

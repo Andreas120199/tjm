@@ -90,6 +90,10 @@ $imgUrl = "logo_tjm.png";
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Customer
                             </a>
+                            <a class="nav-link" href="sellerkaryawan.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                Penjual
+                            </a>
                             <a class="nav-link" href="infokaryawan2.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Karyawan

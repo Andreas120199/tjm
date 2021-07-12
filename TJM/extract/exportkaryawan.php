@@ -35,6 +35,7 @@
 <body>
 		<div class="container">
 			<h2>List Karyawan</h2>
+			<br>
 				<div class="data-tables datatable-dark">
 					<table id="dataTable3" class="display" style="width:100%"><thead class="thead-dark">
 											<tr>
@@ -77,7 +78,7 @@ $(document).ready(function() {
     $('#dataTable3').DataTable( {
         dom: 'Bfrtip',
         buttons: [
-           'copy', 'csv', 'excel', 'pdf', 'print',
+           'copy', 'excel', 'pdf', 'print',
         ]
     } );
 } );
